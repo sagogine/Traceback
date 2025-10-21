@@ -25,6 +25,8 @@
 - OpenAI API Key
 - Optional: Cohere API Key (for advanced reranking)
 
+![Alt text](ui.png?raw=true "Traceback")
+
 ### Installation
 
 1. **Clone the repository**
@@ -145,7 +147,7 @@ The system is evaluated using the RAGAS framework with comprehensive metrics:
 1. **Incident Triage Tab**
    - Natural language incident description input
    - Priority level selection
-   - Advanced retrieval method selection dropdown (see `capture_interface.html`)
+   - Advanced retrieval method selection dropdown
    - Real-time analysis results
 
 2. **Document Search Tab**

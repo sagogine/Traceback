@@ -240,8 +240,8 @@ The interface allows users to:
 - Compare performance improvements
 - Submit incident queries with their chosen retrieval strategy
 
-![Retriever Selection Interface](capture_interface.html)
-*Screenshot showing the Traceback web interface with the advanced retriever selection dropdown in the Incident Triage section*
+![Alt text](ui.png?raw=true "Traceback")
+
 
 ---
 
