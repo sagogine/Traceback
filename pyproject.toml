@@ -1,0 +1,70 @@
+[project]
+name = "tracebackcore"
+version = "0.1.0"
+description = "Instant triage across docs, code & lineage"
+readme = "README.md"
+authors = [{ name = "Sandeep Gogineni" }]
+requires-python = ">=3.9"
+license = { text = "MIT" }
+
+# Runtime dependencies (converted from requirements.txt)
+dependencies = [
+  "openai>=1.0.0",
+  "langchain>=0.1.0",
+  "langchain-openai>=0.1.0",
+  "langgraph>=0.1.0",
+  "qdrant-client>=1.7.0",
+  "ragas>=0.1.0",
+  "pandas>=2.0.0",
+  "numpy>=1.24.0",
+  "pypdf>=4.0.0",
+  "python-docx>=0.8.11",
+  "beautifulsoup4>=4.12.0",
+  "fastapi>=0.104.0",
+  "uvicorn>=0.24.0",
+  "pydantic>=2.5.0",
+  "tavily-python>=0.3.0",
+  "rank-bm25>=0.2.2",
+  "sentence-transformers>=2.2.2",
+  "python-dotenv>=1.0.0",
+  "click>=8.1.0",
+  "rich>=13.7.0",
+  "jupyter>=1.0.0",
+  "ipykernel>=6.25.0",
+  "cohere>=5.5.8",
+  "langchain-text-splitters>=0.3.11",
+  "langchain-experimental>=0.3.4",
+  "langchain-qdrant>=0.2.1",
+  "langchain-community>=0.3.31",
+  "datasets>=2.0.0",
+  "matplotlib>=3.9.4",
+  "seaborn>=0.13.2",
+]
+
+[project.optional-dependencies]
+# Developer tooling
+dev = [
+  "pytest>=7.4.0",
+  "black>=23.0.0",
+  "flake8>=6.0.0",
+]
+
+[project.scripts]
+traceback = "traceback.cli.main:cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+managed = true
+# Exclude notebooks data and test artifacts from resolution if needed
+
+[tool.uv.sources]
+# Local package layout
+
+[tool.hatch.build]
+packages = ["src/traceback"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/traceback"]

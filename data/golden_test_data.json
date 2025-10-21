@@ -1,0 +1,152 @@
+[
+    {
+        "question": "What should I do if the sales orders pipeline fails?",
+        "ground_truth": "If the sales orders pipeline fails: 1) Check pipeline status and error logs, 2) Verify data source connectivity (raw.sales_orders table), 3) Review data quality issues (missing customer_id, product_id, invalid dates), 4) Check SLA compliance (2-hour freshness requirement), 5) Notify data-sales team and stakeholders, 6) Implement rollback if needed, 7) Monitor downstream impacts on curated.sales_orders and revenue_summary tables.",
+        "context": [
+            "Sales orders pipeline processes raw order data into curated datasets for analytics and reporting",
+            "SLA: 2 hours freshness requirement",
+            "Owner: data-sales team",
+            "Dependencies: raw.sales_orders, raw.customers, raw.products"
+        ]
+    },
+    {
+        "question": "How does the customer analytics pipeline segment customers?",
+        "ground_truth": "The customer analytics pipeline segments customers using: 1) Value-based segmentation (High Value >$1000, Medium Value $500-1000, Low Value <$500), 2) Frequency-based segmentation (Frequent ≥10 active days, Regular 5-9 days, Occasional <5 days), 3) Behavioral segmentation based on purchase patterns, 4) Demographic segmentation using customer attributes, 5) RFM analysis (Recency, Frequency, Monetary), 6) Predictive segmentation using ML models for churn prediction and lifetime value estimation.",
+        "context": [
+            "Customer behavior analytics for segmentation and lifetime value analysis",
+            "Segmentation methods: value-based, frequency-based, behavioral, demographic",
+            "RFM analysis and predictive modeling for customer insights",
+            "Owner: data-analytics team"
+        ]
+    },
+    {
+        "question": "What are the stock level management rules for inventory?",
+        "ground_truth": "Inventory stock level management rules include: 1) Safety stock calculation (lead time × demand variability), 2) Reorder point formula (safety stock + lead time demand), 3) Economic Order Quantity (EOQ) optimization, 4) ABC analysis for inventory classification, 5) Just-in-Time (JIT) inventory for fast-moving items, 6) Seasonal demand forecasting, 7) Supplier performance monitoring, 8) Automated reorder triggers, 9) Stock-out prevention protocols, 10) Excess inventory management.",
+        "context": [
+            "Inventory management system for stock optimization and cost reduction",
+            "Stock level rules: safety stock, reorder points, EOQ, ABC analysis",
+            "Automated reordering and demand forecasting",
+            "Owner: data-operations team"
+        ]
+    },
+    {
+        "question": "What financial controls are implemented in the reporting pipeline?",
+        "ground_truth": "Financial reporting pipeline controls include: 1) Data validation rules (balance sheet reconciliation, P&L accuracy checks), 2) Audit trail maintenance for all financial transactions, 3) Segregation of duties (data entry vs approval), 4) Automated variance analysis (budget vs actual), 5) Compliance checks (GAAP, SOX requirements), 6) Data lineage tracking for financial data, 7) Approval workflows for financial reports, 8) Risk assessment and mitigation, 9) Performance monitoring and alerting, 10) Backup and recovery procedures.",
+        "context": [
+            "Financial reporting pipeline with comprehensive controls and compliance",
+            "Controls: data validation, audit trails, segregation of duties, variance analysis",
+            "Compliance: GAAP, SOX requirements with approval workflows",
+            "Owner: data-finance team"
+        ]
+    },
+    {
+        "question": "What attribution models are used for marketing campaigns?",
+        "ground_truth": "Marketing attribution models include: 1) First-touch attribution (credit to first interaction), 2) Last-touch attribution (credit to final interaction), 3) Linear attribution (equal credit across all touchpoints), 4) Time-decay attribution (more credit to recent interactions), 5) Position-based attribution (40% first, 40% last, 20% middle), 6) Data-driven attribution using ML models, 7) Multi-touch attribution with custom weighting, 8) Shapley value attribution for fair credit distribution.",
+        "context": [
+            "Marketing attribution pipeline for campaign effectiveness and ROI analysis",
+            "Attribution models: first-touch, last-touch, linear, time-decay, position-based",
+            "ML-based data-driven attribution and multi-touch analysis",
+            "Owner: data-marketing team"
+        ]
+    },
+    {
+        "question": "How is supplier performance measured in the supply chain?",
+        "ground_truth": "Supplier performance measurement includes: 1) On-time delivery rate (>95% target), 2) Quality score (>98% target), 3) Cost efficiency with budget variance tracking, 4) Risk assessment for supplier stability, 5) Lead time performance, 6) Compliance with specifications, 7) Communication effectiveness, 8) Innovation contribution, 9) Sustainability metrics, 10) Overall supplier scorecard with weighted KPIs.",
+        "context": [
+            "Supply chain optimization for supplier performance and cost reduction",
+            "Performance metrics: on-time delivery, quality score, cost efficiency, risk assessment",
+            "Supplier scorecard with weighted KPIs and continuous improvement",
+            "Owner: data-operations team"
+        ]
+    },
+    {
+        "question": "What employee metrics are tracked in the HR analytics pipeline?",
+        "ground_truth": "HR analytics tracks employee metrics including: 1) Retention rate (annual turnover calculations), 2) Performance scores (quarterly evaluations), 3) Engagement metrics (survey-based indicators), 4) Career progression (promotion and growth tracking), 5) Time-to-hire metrics, 6) Employee satisfaction scores, 7) Training completion rates, 8) Diversity and inclusion metrics, 9) Cost per hire, 10) Absenteeism rates.",
+        "context": [
+            "HR analytics pipeline for employee lifecycle and performance management",
+            "Employee metrics: retention, performance, engagement, career progression",
+            "Predictive analytics for churn prediction and performance forecasting",
+            "Owner: data-hr team"
+        ]
+    },
+    {
+        "question": "What product usage metrics are monitored in real-time?",
+        "ground_truth": "Real-time product usage metrics include: 1) DAU/MAU (Daily and Monthly Active Users), 2) Feature adoption rates for new features, 3) Session analytics for user journey analysis, 4) Conversion funnels for step-by-step tracking, 5) Engagement scores (user activity level), 6) Retention rates (user return behavior), 7) Feature stickiness (feature retention metrics), 8) NPS tracking (Net Promoter Score), 9) Performance metrics (load times, error rates), 10) User journey mapping.",
+        "context": [
+            "Product analytics pipeline for real-time usage monitoring and optimization",
+            "Usage metrics: DAU/MAU, feature adoption, session analytics, conversion funnels",
+            "Product KPIs: engagement, retention, feature stickiness, NPS tracking",
+            "Owner: data-product team"
+        ]
+    },
+    {
+        "question": "What risk management controls are implemented?",
+        "ground_truth": "Risk management controls include: 1) Credit risk assessment using ML models, 2) Market risk monitoring with VaR calculations, 3) Operational risk tracking and mitigation, 4) Compliance risk monitoring, 5) Fraud detection algorithms, 6) Stress testing scenarios, 7) Risk appetite framework, 8) Early warning systems, 9) Risk reporting and dashboards, 10) Incident response procedures.",
+        "context": [
+            "Risk management pipeline for comprehensive risk assessment and mitigation",
+            "Risk types: credit, market, operational, compliance, fraud",
+            "ML-based risk models with early warning systems",
+            "Owner: data-risk team"
+        ]
+    },
+    {
+        "question": "What compliance monitoring procedures are in place?",
+        "ground_truth": "Compliance monitoring procedures include: 1) Regulatory requirement tracking (GDPR, CCPA, SOX), 2) Data privacy compliance monitoring, 3) Audit trail maintenance, 4) Policy adherence checking, 5) Risk assessment and mitigation, 6) Compliance reporting and dashboards, 7) Automated compliance alerts, 8) Training and awareness programs, 9) Third-party compliance monitoring, 10) Incident response and remediation procedures.",
+        "context": [
+            "Compliance monitoring pipeline for regulatory adherence and risk management",
+            "Compliance areas: GDPR, CCPA, SOX, data privacy, policy adherence",
+            "Automated monitoring with alerts and reporting dashboards",
+            "Owner: data-compliance team"
+        ]
+    },
+    {
+        "question": "What are the escalation procedures for data pipeline incidents?",
+        "ground_truth": "Data pipeline incident escalation procedures: 1) Level 1: Data engineer on-call (immediate response), 2) Level 2: Senior data engineer (if unresolved in 30 minutes), 3) Level 3: Data platform team lead (if unresolved in 1 hour), 4) Level 4: Engineering manager (if unresolved in 2 hours), 5) Level 5: Director of Engineering (if unresolved in 4 hours), 6) Stakeholder notification based on SLA impact, 7) Post-incident review and documentation, 8) Root cause analysis and prevention measures.",
+        "context": [
+            "Incident response procedures for data pipeline failures and SLA breaches",
+            "Escalation levels: L1-L5 with time-based triggers",
+            "Stakeholder notification and post-incident review processes",
+            "Owner: data-platform team"
+        ]
+    },
+    {
+        "question": "What are the data quality standards and monitoring?",
+        "ground_truth": "Data quality standards include: 1) Completeness checks (>95% target), 2) Accuracy validation against source systems, 3) Consistency checks across datasets, 4) Timeliness monitoring (SLA compliance), 5) Validity checks (format and range validation), 6) Uniqueness verification (duplicate detection), 7) Referential integrity checks, 8) Business rule validation, 9) Data profiling and monitoring, 10) Automated quality alerts and reporting.",
+        "context": [
+            "Data quality monitoring pipeline for comprehensive quality assurance",
+            "Quality dimensions: completeness, accuracy, consistency, timeliness, validity",
+            "Automated monitoring with alerts and quality dashboards",
+            "Owner: data-quality team"
+        ]
+    },
+    {
+        "question": "What are the SLA definitions and monitoring procedures?",
+        "ground_truth": "SLA definitions and monitoring: 1) Availability SLA (99.0-99.9% uptime), 2) Performance SLA (response time <2 seconds), 3) Data freshness SLA (2-24 hours depending on pipeline), 4) Accuracy SLA (>98% data accuracy), 5) Completeness SLA (>95% data completeness), 6) Monitoring dashboards and alerts, 7) SLA breach notification procedures, 8) Performance trend analysis, 9) SLA reporting and metrics, 10) Continuous improvement processes.",
+        "context": [
+            "SLA monitoring pipeline for service level agreement compliance",
+            "SLA types: availability, performance, data freshness, accuracy, completeness",
+            "Monitoring dashboards with breach notifications and reporting",
+            "Owner: data-platform team"
+        ]
+    },
+    {
+        "question": "What are the troubleshooting procedures for data pipeline issues?",
+        "ground_truth": "Data pipeline troubleshooting procedures: 1) Check pipeline status and logs, 2) Verify data source connectivity, 3) Review data quality issues, 4) Check resource utilization (CPU, memory, disk), 5) Validate configuration settings, 6) Test data transformations, 7) Check downstream dependencies, 8) Review error messages and stack traces, 9) Implement temporary fixes if needed, 10) Document findings and solutions.",
+        "context": [
+            "Troubleshooting guide for systematic data pipeline issue resolution",
+            "Troubleshooting steps: status check, connectivity, quality, resources, configuration",
+            "Systematic approach with documentation and knowledge sharing",
+            "Owner: data-platform team"
+        ]
+    },
+    {
+        "question": "What are the common failure patterns in data pipelines?",
+        "ground_truth": "Common data pipeline failure patterns include: 1) Data source unavailability (network issues, API rate limits), 2) Data quality issues (schema changes, missing fields), 3) Resource constraints (memory, CPU, disk space), 4) Configuration errors (incorrect parameters, environment mismatches), 5) Dependency failures (upstream pipeline issues), 6) Timeout issues (long-running queries), 7) Authentication failures (expired credentials), 8) Data volume spikes (unexpected data growth), 9) Code deployment issues, 10) Infrastructure failures.",
+        "context": [
+            "Common failure patterns and prevention strategies for data pipelines",
+            "Failure types: data source, quality, resources, configuration, dependencies",
+            "Prevention strategies and monitoring for early detection",
+            "Owner: data-platform team"
+        ]
+    }
+]

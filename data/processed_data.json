@@ -1,0 +1,1305 @@
+{
+  "documents": [
+    {
+      "content": "# Data Quality Standards and Monitoring\n\n## Quality Dimensions\n\n### Completeness\n- No missing values in critical fields\n- All expected records present\n- Referential integrity maintained\n\n### Accuracy  \n- Data matches source systems\n- Business rules validated\n- Calculated fields verified\n\n### Consistency\n- Format standards applied\n- Naming conventions followed\n- Data types consistent\n\n### Timeliness\n- Data available within SLA windows\n- Processing delays monitored\n- Stale data alerts configured",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/data_quality_standards.md",
+        "type": "markdown",
+        "file_name": "data_quality_standards.md",
+        "chunk_index": 0,
+        "chunk_size": 73
+      }
+    },
+    {
+      "content": "## Monitoring Framework\n\n### Automated Checks\n- Schema validation\n- Data freshness monitoring\n- Anomaly detection\n- Statistical quality metrics\n\n### Alerting Thresholds\n- **Critical**: >1% data quality issues\n- **Warning**: >0.1% data quality issues\n- **Info**: Quality metrics trending\n\n## Remediation Procedures\n1. **Identify** root cause\n2. **Assess** impact scope\n3. **Apply** fix or workaround\n4. **Validate** resolution\n5. **Document** lessons learned",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/data_quality_standards.md",
+        "type": "markdown",
+        "file_name": "data_quality_standards.md",
+        "chunk_index": 1,
+        "chunk_size": 63
+      }
+    },
+    {
+      "content": "# Inventory Management Pipeline Specification\n\n## Purpose\nReal-time inventory tracking and management for warehouse operations and demand forecasting.\n\n## Data Sources\n- **raw.inventory_transactions**: Stock movements\n- **raw.warehouse_locations**: Physical storage data\n- **raw.supplier_data**: Vendor information\n- **raw.demand_forecasts**: ML-generated predictions",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/inventory_management_spec.md",
+        "type": "markdown",
+        "file_name": "inventory_management_spec.md",
+        "chunk_index": 0,
+        "chunk_size": 38
+      }
+    },
+    {
+      "content": "## Business Rules\n### Stock Level Management\n- **Critical**: <10 units remaining\n- **Low**: 10-50 units remaining\n- **Normal**: 50-200 units remaining\n- **High**: >200 units remaining\n\n### Reorder Logic\n- **Auto-reorder**: When stock < reorder point\n- **Manual approval**: For high-value items\n- **Seasonal adjustments**: Based on historical patterns",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/inventory_management_spec.md",
+        "type": "markdown",
+        "file_name": "inventory_management_spec.md",
+        "chunk_index": 1,
+        "chunk_size": 50
+      }
+    },
+    {
+      "content": "## SLA Commitments\n- **Availability**: 99.9% uptime (critical for operations)\n- **Freshness**: Real-time updates (<5 minutes)\n- **Accuracy**: <0.01% error rate\n\n## Downstream Dependencies\n- **operations.stock_alerts**: Warehouse notifications\n- **procurement.reorder_queue**: Purchase orders\n- **finance.inventory_valuation**: Accounting systems\n\n## Ownership\n- **Primary**: data-operations team\n- **Secondary**: data-finance team\n- **Stakeholders**: Operations, Procurement, Finance",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/inventory_management_spec.md",
+        "type": "markdown",
+        "file_name": "inventory_management_spec.md",
+        "chunk_index": 2,
+        "chunk_size": 51
+      }
+    },
+    {
+      "content": "# Service Level Agreement Definitions\n\n## Data Freshness SLAs\n- **Real-time**: <5 minutes delay\n- **Near real-time**: <1 hour delay  \n- **Batch**: <4 hours delay\n- **Historical**: <24 hours delay\n\n## Availability SLAs\n- **Critical Systems**: 99.9% uptime\n- **Important Systems**: 99.5% uptime\n- **Standard Systems**: 99.0% uptime\n\n## Recovery Time Objectives (RTO)\n- **P0 Incidents**: <1 hour\n- **P1 Incidents**: <4 hours\n- **P2 Incidents**: <24 hours\n- **P3 Incidents**: <72 hours",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/sla_definitions.md",
+        "type": "markdown",
+        "file_name": "sla_definitions.md",
+        "chunk_index": 0,
+        "chunk_size": 73
+      }
+    },
+    {
+      "content": "## Data Accuracy Requirements\n- **Financial Data**: <0.01% error rate\n- **Operational Data**: <0.1% error rate\n- **Analytical Data**: <1% error rate",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/sla_definitions.md",
+        "type": "markdown",
+        "file_name": "sla_definitions.md",
+        "chunk_index": 1,
+        "chunk_size": 22
+      }
+    },
+    {
+      "content": "# Risk Management Pipeline Specification\n\n## Purpose\nComprehensive risk assessment and monitoring for operational, financial, and compliance risks.\n\n## Data Sources\n- **raw.transaction_data**: Financial transactions\n- **raw.customer_data**: Customer risk profiles\n- **raw.market_data**: External market indicators\n- **raw.compliance_data**: Regulatory compliance metrics",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/risk_management_spec.md",
+        "type": "markdown",
+        "file_name": "risk_management_spec.md",
+        "chunk_index": 0,
+        "chunk_size": 40
+      }
+    },
+    {
+      "content": "## Business Rules\n### Risk Scoring\n- **Credit risk**: Customer creditworthiness\n- **Operational risk**: Process failure probability\n- **Market risk**: External market volatility\n- **Compliance risk**: Regulatory violation probability\n\n### Risk Monitoring\n- **Real-time alerts**: Threshold-based notifications\n- **Risk dashboards**: Executive reporting\n- **Trend analysis**: Historical risk patterns\n- **Mitigation tracking**: Risk reduction measures",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/risk_management_spec.md",
+        "type": "markdown",
+        "file_name": "risk_management_spec.md",
+        "chunk_index": 1,
+        "chunk_size": 54
+      }
+    },
+    {
+      "content": "## SLA Commitments\n- **Availability**: 99.95% uptime (critical for compliance)\n- **Freshness**: Real-time updates (<30 seconds)\n- **Accuracy**: <0.001% error rate\n\n## Downstream Dependencies\n- **compliance.risk_reports**: Regulatory reporting\n- **finance.risk_dashboard**: Executive dashboards\n- **operations.risk_alerts**: Operational notifications\n\n## Ownership\n- **Primary**: data-risk team\n- **Secondary**: data-compliance team\n- **Stakeholders**: Risk Management, Compliance, Finance",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/risk_management_spec.md",
+        "type": "markdown",
+        "file_name": "risk_management_spec.md",
+        "chunk_index": 2,
+        "chunk_size": 52
+      }
+    },
+    {
+      "content": "# Incident Escalation Procedures\n\n## Escalation Triggers\n- SLA breach imminent or occurred\n- Multiple downstream systems affected\n- Business-critical functionality impacted\n- No resolution within expected timeframe\n\n## Escalation Paths\n1. **Level 1**: Data Engineer (0-30 min)\n2. **Level 2**: Senior Data Engineer (30-60 min)\n3. **Level 3**: Data Engineering Lead (60-120 min)\n4. **Level 4**: Engineering Manager (120+ min)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/escalation_procedures.md",
+        "type": "markdown",
+        "file_name": "escalation_procedures.md",
+        "chunk_index": 0,
+        "chunk_size": 61
+      }
+    },
+    {
+      "content": "## Communication Protocols\n- **Immediate**: Slack alerts to #data-incidents\n- **15 min**: Email to stakeholders\n- **30 min**: Status page update\n- **60 min**: Executive notification for P0/P1",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/escalation_procedures.md",
+        "type": "markdown",
+        "file_name": "escalation_procedures.md",
+        "chunk_index": 1,
+        "chunk_size": 28
+      }
+    },
+    {
+      "content": "# Human Resources Analytics Pipeline Specification\n\n## Purpose\nEmployee lifecycle analytics for talent management, retention, and performance optimization.\n\n## Data Sources\n- **raw.employee_data**: HR master data\n- **raw.performance_reviews**: Performance evaluations\n- **raw.attendance_data**: Time and attendance\n- **raw.learning_records**: Training and development",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/hr_analytics_spec.md",
+        "type": "markdown",
+        "file_name": "hr_analytics_spec.md",
+        "chunk_index": 0,
+        "chunk_size": 40
+      }
+    },
+    {
+      "content": "## Business Rules\n### Employee Metrics\n- **Retention rate**: Annual turnover calculations\n- **Performance scores**: Quarterly evaluations\n- **Engagement metrics**: Survey-based indicators\n- **Career progression**: Promotion and growth tracking\n\n### Predictive Analytics\n- **Churn prediction**: ML-based retention modeling\n- **Performance forecasting**: Future performance prediction\n- **Skill gap analysis**: Training needs identification",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/hr_analytics_spec.md",
+        "type": "markdown",
+        "file_name": "hr_analytics_spec.md",
+        "chunk_index": 1,
+        "chunk_size": 51
+      }
+    },
+    {
+      "content": "## SLA Commitments\n- **Availability**: 99.0% uptime\n- **Freshness**: Monthly updates by 5th of month\n- **Accuracy**: <0.5% error rate\n\n## Downstream Dependencies\n- **hr.talent_dashboard**: Management reporting\n- **learning.training_recommendations**: Development planning\n- **finance.headcount_planning**: Budget planning\n\n## Ownership\n- **Primary**: data-hr team\n- **Secondary**: data-analytics team\n- **Stakeholders**: HR, Learning & Development, Finance",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/hr_analytics_spec.md",
+        "type": "markdown",
+        "file_name": "hr_analytics_spec.md",
+        "chunk_index": 2,
+        "chunk_size": 52
+      }
+    },
+    {
+      "content": "# Product Analytics Pipeline Specification\n\n## Purpose\nComprehensive product usage analytics for feature optimization and user experience improvement.\n\n## Data Sources\n- **raw.user_interactions**: App and website usage\n- **raw.feature_usage**: Feature adoption metrics\n- **raw.user_feedback**: Surveys and ratings\n- **raw.performance_metrics**: System performance data",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/product_analytics_spec.md",
+        "type": "markdown",
+        "file_name": "product_analytics_spec.md",
+        "chunk_index": 0,
+        "chunk_size": 42
+      }
+    },
+    {
+      "content": "## Business Rules\n### Usage Metrics\n- **DAU/MAU**: Daily and monthly active users\n- **Feature adoption**: New feature usage rates\n- **Session analytics**: User journey analysis\n- **Conversion funnels**: Step-by-step conversion tracking\n\n### Product KPIs\n- **Engagement score**: User activity level\n- **Retention rate**: User return behavior\n- **Feature stickiness**: Feature retention metrics\n- **NPS tracking**: Net Promoter Score monitoring",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/product_analytics_spec.md",
+        "type": "markdown",
+        "file_name": "product_analytics_spec.md",
+        "chunk_index": 1,
+        "chunk_size": 60
+      }
+    },
+    {
+      "content": "## SLA Commitments\n- **Availability**: 99.5% uptime\n- **Freshness**: Real-time updates (<1 minute)\n- **Accuracy**: <0.1% error rate\n\n## Downstream Dependencies\n- **product.feature_dashboard**: Product team insights\n- **engineering.performance_monitoring**: System optimization\n- **growth.user_segmentation**: Growth strategy\n\n## Ownership\n- **Primary**: data-product team\n- **Secondary**: data-engineering team\n- **Stakeholders**: Product, Engineering, Growth",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/product_analytics_spec.md",
+        "type": "markdown",
+        "file_name": "product_analytics_spec.md",
+        "chunk_index": 2,
+        "chunk_size": 49
+      }
+    },
+    {
+      "content": "# Sales Orders Domain Specification\n\n## Purpose\nThe sales orders pipeline processes raw order data into curated, business-ready datasets for analytics and reporting.\n\n## Data Sources\n- **raw.sales_orders**: Raw order data from e-commerce platform\n- **raw.customers**: Customer master data\n- **raw.products**: Product catalog\n\n## Business Rules",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/sales_orders_spec.md",
+        "type": "markdown",
+        "file_name": "sales_orders_spec.md",
+        "chunk_index": 0,
+        "chunk_size": 46
+      }
+    },
+    {
+      "content": "## Business Rules\n\n### Data Quality Requirements\n- Order amounts must be positive\n- Customer IDs must exist in customer master\n- Product IDs must exist in product catalog\n- Timestamps must be valid and recent\n\n### Transformation Logic\n1. **Clean**: Remove invalid records\n2. **Enrich**: Add customer and product details\n3. **Calculate**: Compute derived fields\n4. **Validate**: Apply business rules",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/sales_orders_spec.md",
+        "type": "markdown",
+        "file_name": "sales_orders_spec.md",
+        "chunk_index": 1,
+        "chunk_size": 61
+      }
+    },
+    {
+      "content": "## SLA Commitments\n- **Availability**: 99.9% uptime\n- **Freshness**: Data available within 2 hours of source update\n- **Accuracy**: <0.1% error rate\n\n## Downstream Dependencies\n- **curated.revenue_summary**: Daily revenue reporting\n- **bi.daily_sales**: Executive dashboard\n- **analytics.customer_behavior**: Customer analytics\n\n## Ownership\n- **Primary**: data-sales team\n- **Secondary**: data-platform team\n- **Stakeholders**: Finance, Marketing, Product",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/sales_orders_spec.md",
+        "type": "markdown",
+        "file_name": "sales_orders_spec.md",
+        "chunk_index": 2,
+        "chunk_size": 53
+      }
+    },
+    {
+      "content": "# Compliance Monitoring Pipeline Specification\n\n## Purpose\nAutomated compliance monitoring and reporting for regulatory requirements and internal policies.\n\n## Data Sources\n- **raw.audit_logs**: System access and changes\n- **raw.transaction_data**: Financial transactions\n- **raw.customer_data**: Customer information\n- **raw.employee_data**: Employee records",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/compliance_monitoring_spec.md",
+        "type": "markdown",
+        "file_name": "compliance_monitoring_spec.md",
+        "chunk_index": 0,
+        "chunk_size": 39
+      }
+    },
+    {
+      "content": "## Business Rules\n### Regulatory Compliance\n- **GDPR**: Data privacy and protection\n- **SOX**: Financial controls and reporting\n- **PCI DSS**: Payment card data security\n- **HIPAA**: Healthcare data protection\n\n### Monitoring Rules\n- **Data access**: Unauthorized access detection\n- **Data retention**: Compliance with retention policies\n- **Data quality**: Accuracy and completeness checks\n- **Audit trails**: Complete activity logging",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/compliance_monitoring_spec.md",
+        "type": "markdown",
+        "file_name": "compliance_monitoring_spec.md",
+        "chunk_index": 1,
+        "chunk_size": 59
+      }
+    },
+    {
+      "content": "## SLA Commitments\n- **Availability**: 99.99% uptime (critical for compliance)\n- **Freshness**: Real-time monitoring (<10 seconds)\n- **Accuracy**: <0.0001% error rate\n\n## Downstream Dependencies\n- **compliance.violation_alerts**: Immediate notifications\n- **audit.compliance_reports**: Regulatory reporting\n- **legal.risk_assessment**: Legal risk evaluation\n\n## Ownership\n- **Primary**: data-compliance team\n- **Secondary**: data-security team\n- **Stakeholders**: Compliance, Legal, Security",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/compliance_monitoring_spec.md",
+        "type": "markdown",
+        "file_name": "compliance_monitoring_spec.md",
+        "chunk_index": 2,
+        "chunk_size": 52
+      }
+    },
+    {
+      "content": "# Supply Chain Analytics Pipeline Specification\n\n## Purpose\nEnd-to-end supply chain visibility and optimization for cost reduction and efficiency improvement.\n\n## Data Sources\n- **raw.supplier_performance**: Vendor metrics\n- **raw.logistics_data**: Shipping and delivery\n- **raw.procurement_data**: Purchase orders\n- **raw.quality_metrics**: Product quality scores",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/supply_chain_spec.md",
+        "type": "markdown",
+        "file_name": "supply_chain_spec.md",
+        "chunk_index": 0,
+        "chunk_size": 41
+      }
+    },
+    {
+      "content": "## Business Rules\n### Supplier Performance\n- **On-time delivery**: >95% target\n- **Quality score**: >98% target\n- **Cost efficiency**: Budget variance tracking\n- **Risk assessment**: Supplier stability metrics\n\n### Logistics Optimization\n- **Route optimization**: Cost and time minimization\n- **Inventory positioning**: Strategic stock placement\n- **Demand forecasting**: ML-based predictions",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/supply_chain_spec.md",
+        "type": "markdown",
+        "file_name": "supply_chain_spec.md",
+        "chunk_index": 1,
+        "chunk_size": 49
+      }
+    },
+    {
+      "content": "## SLA Commitments\n- **Availability**: 99.5% uptime\n- **Freshness**: Daily updates by 7 AM\n- **Accuracy**: <0.2% error rate\n\n## Downstream Dependencies\n- **procurement.vendor_scorecards**: Supplier evaluation\n- **logistics.route_optimization**: Delivery planning\n- **finance.cost_analysis**: Cost center reporting\n\n## Ownership\n- **Primary**: data-supply-chain team\n- **Secondary**: data-operations team\n- **Stakeholders**: Procurement, Logistics, Finance",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/supply_chain_spec.md",
+        "type": "markdown",
+        "file_name": "supply_chain_spec.md",
+        "chunk_index": 2,
+        "chunk_size": 50
+      }
+    },
+    {
+      "content": "# Data Pipeline Troubleshooting Guide\n\n## Common Failure Patterns\n### Data Quality Issues\n- **Symptoms**: Null values, invalid formats, constraint violations\n- **Root Causes**: Source system changes, data corruption, schema drift\n- **Solutions**: Data validation, schema enforcement, source monitoring",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/troubleshooting_guide.md",
+        "type": "markdown",
+        "file_name": "troubleshooting_guide.md",
+        "chunk_index": 0,
+        "chunk_size": 39
+      }
+    },
+    {
+      "content": "### Performance Degradation\n- **Symptoms**: Slow queries, timeouts, resource exhaustion\n- **Root Causes**: Data volume growth, inefficient queries, resource constraints\n- **Solutions**: Query optimization, resource scaling, partitioning\n\n### Dependency Failures\n- **Symptoms**: Missing upstream data, broken references\n- **Root Causes**: Upstream pipeline failures, API outages, network issues\n- **Solutions**: Dependency monitoring, fallback mechanisms, retry logic",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/troubleshooting_guide.md",
+        "type": "markdown",
+        "file_name": "troubleshooting_guide.md",
+        "chunk_index": 1,
+        "chunk_size": 55
+      }
+    },
+    {
+      "content": "## Diagnostic Procedures\n1. Check pipeline logs for error messages\n2. Verify data source availability\n3. Validate data quality metrics\n4. Test individual pipeline components\n5. Review recent changes or deployments",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/troubleshooting_guide.md",
+        "type": "markdown",
+        "file_name": "troubleshooting_guide.md",
+        "chunk_index": 2,
+        "chunk_size": 31
+      }
+    },
+    {
+      "content": "# Marketing Attribution Pipeline Specification\n\n## Purpose\nMulti-touch attribution modeling for marketing campaign effectiveness and ROI analysis.\n\n## Data Sources\n- **raw.marketing_touchpoints**: Customer interactions\n- **raw.campaign_performance**: Campaign metrics\n- **raw.conversion_events**: Purchase conversions\n- **raw.customer_journey**: Complete customer path",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/marketing_attribution_spec.md",
+        "type": "markdown",
+        "file_name": "marketing_attribution_spec.md",
+        "chunk_index": 0,
+        "chunk_size": 37
+      }
+    },
+    {
+      "content": "## Business Rules\n### Attribution Models\n- **First Touch**: Credit to first interaction\n- **Last Touch**: Credit to final interaction\n- **Linear**: Equal credit to all touchpoints\n- **Time Decay**: More credit to recent interactions\n\n### ROI Calculations\n- **Campaign ROI**: Revenue / Campaign Cost\n- **Channel ROI**: Revenue / Channel Investment\n- **Customer LTV**: Lifetime value calculations",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/marketing_attribution_spec.md",
+        "type": "markdown",
+        "file_name": "marketing_attribution_spec.md",
+        "chunk_index": 1,
+        "chunk_size": 58
+      }
+    },
+    {
+      "content": "## SLA Commitments\n- **Availability**: 99.0% uptime\n- **Freshness**: Weekly updates by Monday 9 AM\n- **Accuracy**: <1% error rate\n\n## Downstream Dependencies\n- **marketing.campaign_optimization**: Budget allocation\n- **sales.lead_scoring**: Lead qualification\n- **product.growth_metrics**: Product adoption tracking\n\n## Ownership\n- **Primary**: data-marketing team\n- **Secondary**: data-growth team\n- **Stakeholders**: Marketing, Sales, Product",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/marketing_attribution_spec.md",
+        "type": "markdown",
+        "file_name": "marketing_attribution_spec.md",
+        "chunk_index": 2,
+        "chunk_size": 51
+      }
+    },
+    {
+      "content": "# Financial Reporting Pipeline Specification\n\n## Purpose\nComprehensive financial data processing for regulatory compliance and management reporting.\n\n## Data Sources\n- **raw.general_ledger**: Accounting transactions\n- **raw.accounts_payable**: Vendor payments\n- **raw.accounts_receivable**: Customer payments\n- **raw.budget_data**: Budget vs actual tracking",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/financial_reporting_spec.md",
+        "type": "markdown",
+        "file_name": "financial_reporting_spec.md",
+        "chunk_index": 0,
+        "chunk_size": 38
+      }
+    },
+    {
+      "content": "## Business Rules\n### Financial Controls\n- **Reconciliation**: Daily bank reconciliation\n- **Accruals**: Month-end accrual processing\n- **Depreciation**: Asset depreciation calculations\n- **Tax calculations**: Automated tax computations\n\n### Compliance Requirements\n- **SOX compliance**: Segregation of duties\n- **GAAP standards**: Generally accepted accounting principles\n- **Audit trails**: Complete transaction history",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/financial_reporting_spec.md",
+        "type": "markdown",
+        "file_name": "financial_reporting_spec.md",
+        "chunk_index": 1,
+        "chunk_size": 49
+      }
+    },
+    {
+      "content": "## SLA Commitments\n- **Availability**: 99.95% uptime\n- **Freshness**: Daily processing by 8 AM\n- **Accuracy**: <0.001% error rate (financial precision)\n\n## Downstream Dependencies\n- **finance.monthly_reports**: Management reporting\n- **compliance.audit_data**: External audit support\n- **tax.quarterly_filings**: Tax return preparation\n\n## Ownership\n- **Primary**: data-finance team\n- **Secondary**: data-compliance team\n- **Stakeholders**: Finance, Compliance, External Auditors",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/financial_reporting_spec.md",
+        "type": "markdown",
+        "file_name": "financial_reporting_spec.md",
+        "chunk_index": 2,
+        "chunk_size": 54
+      }
+    },
+    {
+      "content": "# Customer Analytics Pipeline Specification\n\n## Purpose\nAdvanced customer analytics pipeline for segmentation, lifetime value calculation, and behavioral analysis.\n\n## Data Sources\n- **curated.sales_orders**: Processed order data\n- **raw.customer_interactions**: Website and app interactions\n- **raw.marketing_campaigns**: Campaign performance data\n- **raw.support_tickets**: Customer service interactions",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/customer_analytics_spec.md",
+        "type": "markdown",
+        "file_name": "customer_analytics_spec.md",
+        "chunk_index": 0,
+        "chunk_size": 43
+      }
+    },
+    {
+      "content": "## Business Rules\n### Customer Segmentation\n- **VIP**: Lifetime value > ,000\n- **High Value**: Lifetime value ,000-,000\n- **Medium Value**: Lifetime value ,000-,000\n- **Low Value**: Lifetime value < ,000\n\n### Behavioral Metrics\n- **Engagement Score**: Based on interaction frequency\n- **Churn Risk**: Calculated using ML model\n- **Purchase Propensity**: Next 30-day purchase probability",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/customer_analytics_spec.md",
+        "type": "markdown",
+        "file_name": "customer_analytics_spec.md",
+        "chunk_index": 1,
+        "chunk_size": 55
+      }
+    },
+    {
+      "content": "## SLA Commitments\n- **Availability**: 99.5% uptime\n- **Freshness**: Daily updates by 6 AM\n- **Accuracy**: <0.5% error rate\n\n## Downstream Dependencies\n- **marketing.customer_segments**: Campaign targeting\n- **sales.customer_profiles**: Sales team insights\n- **product.user_analytics**: Product usage patterns\n\n## Ownership\n- **Primary**: data-analytics team\n- **Secondary**: data-marketing team\n- **Stakeholders**: Marketing, Sales, Product",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/customer_analytics_spec.md",
+        "type": "markdown",
+        "file_name": "customer_analytics_spec.md",
+        "chunk_index": 2,
+        "chunk_size": 51
+      }
+    },
+    {
+      "content": "# Data Pipeline Incident Response Playbook\n\n## Overview\nThis playbook provides standardized procedures for responding to data pipeline incidents.\n\n## Severity Levels\n- **P0**: Critical business impact, revenue loss\n- **P1**: High impact, SLA breach risk  \n- **P2**: Medium impact, degraded service\n- **P3**: Low impact, minor issues\n\n## Response Procedures",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/incident_playbook.md",
+        "type": "markdown",
+        "file_name": "incident_playbook.md",
+        "chunk_index": 0,
+        "chunk_size": 51
+      }
+    },
+    {
+      "content": "## Response Procedures\n\n### Initial Assessment (0-15 minutes)\n1. **Acknowledge** the incident\n2. **Assess** business impact\n3. **Determine** blast radius\n4. **Notify** stakeholders\n\n### Impact Assessment Questions\n- Which dashboards are affected?\n- What downstream systems depend on this data?\n- Are there any SLA commitments at risk?\n- What is the estimated recovery time?",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/incident_playbook.md",
+        "type": "markdown",
+        "file_name": "incident_playbook.md",
+        "chunk_index": 1,
+        "chunk_size": 55
+      }
+    },
+    {
+      "content": "### Common Actions\n- **Rollback**: Revert to last known good state\n- **Hotfix**: Apply targeted fix\n- **Backfill**: Reprocess affected data\n- **Skip**: Bypass failed step if non-critical\n\n## Escalation Matrix\n- **Data Engineering Lead**: P0/P1 incidents\n- **Platform Team**: Infrastructure issues\n- **Product Manager**: Business impact assessment",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/docs/incident_playbook.md",
+        "type": "markdown",
+        "file_name": "incident_playbook.md",
+        "chunk_index": 2,
+        "chunk_size": 48
+      }
+    },
+    {
+      "content": "-- Product Analytics Pipeline\n-- Purpose: Comprehensive product usage analytics and user experience\n-- Owner: data-product team\n-- SLA: Real-time (<1 minute)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/product_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "product_analytics_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 22
+      }
+    },
+    {
+      "content": "WITH user_interactions AS (\n    SELECT \n        user_id,\n        session_id,\n        interaction_date,\n        feature_name,\n        interaction_type,\n        duration_seconds,\n        COUNT(*) OVER (PARTITION BY session_id) as session_length,\n        SUM(duration_seconds) OVER (PARTITION BY session_id) as total_session_duration\n    FROM raw.user_interactions\n    WHERE interaction_date >= CURRENT_DATE - INTERVAL '7 days'\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/product_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "product_analytics_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 36
+      }
+    },
+    {
+      "content": "feature_usage AS (\n    SELECT \n        feature_name,\n        COUNT(DISTINCT user_id) as unique_users,\n        COUNT(*) as total_interactions,\n        AVG(duration_seconds) as avg_duration,\n        COUNT(DISTINCT session_id) as unique_sessions,\n        COUNT(DISTINCT CASE WHEN interaction_date >= CURRENT_DATE - INTERVAL '1 day' THEN user_id END) as daily_active_users,\n        COUNT(DISTINCT CASE WHEN interaction_date >= CURRENT_DATE - INTERVAL '7 days' THEN user_id END) as weekly_active_users",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/product_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "product_analytics_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 49
+      }
+    },
+    {
+      "content": "-- Inventory Management Pipeline\n-- Purpose: Real-time inventory tracking and reorder management\n-- Owner: data-operations team\n-- SLA: Real-time (<5 minutes)\n\nWITH current_stock AS (\n    SELECT \n        product_id,\n        warehouse_id,\n        SUM(CASE WHEN transaction_type = 'IN' THEN quantity ELSE -quantity END) as current_quantity,\n        MAX(transaction_date) as last_transaction_date\n    FROM raw.inventory_transactions\n    GROUP BY product_id, warehouse_id\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/inventory_management_pipeline.sql",
+        "type": "sql",
+        "file_name": "inventory_management_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 50
+      }
+    },
+    {
+      "content": "stock_levels AS (\n    SELECT \n        cs.*,\n        p.product_name,\n        p.reorder_point,\n        p.max_stock_level,\n        w.warehouse_name,\n        w.location,\n        -- Stock level classification\n        CASE \n            WHEN cs.current_quantity < 10 THEN 'CRITICAL'\n            WHEN cs.current_quantity < p.reorder_point THEN 'LOW'\n            WHEN cs.current_quantity > p.max_stock_level THEN 'HIGH'\n            ELSE 'NORMAL'\n        END as stock_status,",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/inventory_management_pipeline.sql",
+        "type": "sql",
+        "file_name": "inventory_management_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 38
+      }
+    },
+    {
+      "content": "END as stock_status,\n        -- Days of stock remaining\n        CASE \n            WHEN cs.current_quantity > 0 THEN \n                cs.current_quantity / NULLIF(daily_demand, 0)\n            ELSE 0\n        END as days_of_stock\n    FROM current_stock cs\n    JOIN raw.products p ON cs.product_id = p.product_id\n    JOIN raw.warehouse_locations w ON cs.warehouse_id = w.warehouse_id\n    LEFT JOIN (\n        SELECT \n            product_id,\n            AVG(daily_demand) as daily_demand",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/inventory_management_pipeline.sql",
+        "type": "sql",
+        "file_name": "inventory_management_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 48
+      }
+    },
+    {
+      "content": "AVG(daily_demand) as daily_demand\n        FROM raw.demand_forecasts\n        WHERE forecast_date >= CURRENT_DATE - INTERVAL '30 days'\n        GROUP BY product_id\n    ) df ON cs.product_id = df.product_id\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/inventory_management_pipeline.sql",
+        "type": "sql",
+        "file_name": "inventory_management_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 23
+      }
+    },
+    {
+      "content": "reorder_recommendations AS (\n    SELECT \n        *,\n        CASE \n            WHEN stock_status IN ('CRITICAL', 'LOW') THEN 'AUTO_REORDER'\n            WHEN stock_status = 'NORMAL' AND days_of_stock < 7 THEN 'MANUAL_REVIEW'\n            ELSE 'NO_ACTION'\n        END as reorder_action,\n        CASE \n            WHEN stock_status IN ('CRITICAL', 'LOW') THEN \n                GREATEST(reorder_point * 2, current_quantity * 3)\n            ELSE NULL\n        END as suggested_order_quantity",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/inventory_management_pipeline.sql",
+        "type": "sql",
+        "file_name": "inventory_management_pipeline.sql",
+        "chunk_index": 4,
+        "chunk_size": 46
+      }
+    },
+    {
+      "content": "END as suggested_order_quantity\n    FROM stock_levels\n)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/inventory_management_pipeline.sql",
+        "type": "sql",
+        "file_name": "inventory_management_pipeline.sql",
+        "chunk_index": 5,
+        "chunk_size": 6
+      }
+    },
+    {
+      "content": "-- Marketing Attribution Pipeline\n-- Purpose: Multi-touch attribution modeling for campaign ROI\n-- Owner: data-marketing team\n-- SLA: Weekly by Monday 9 AM",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/marketing_attribution_pipeline.sql",
+        "type": "sql",
+        "file_name": "marketing_attribution_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 23
+      }
+    },
+    {
+      "content": "WITH customer_journey AS (\n    SELECT \n        customer_id,\n        touchpoint_id,\n        touchpoint_date,\n        channel,\n        campaign_id,\n        touchpoint_type,\n        ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY touchpoint_date) as touchpoint_sequence,\n        COUNT(*) OVER (PARTITION BY customer_id) as total_touchpoints\n    FROM raw.marketing_touchpoints\n    WHERE touchpoint_date >= CURRENT_DATE - INTERVAL '90 days'\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/marketing_attribution_pipeline.sql",
+        "type": "sql",
+        "file_name": "marketing_attribution_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 39
+      }
+    },
+    {
+      "content": "conversion_events AS (\n    SELECT \n        customer_id,\n        conversion_date,\n        conversion_value,\n        conversion_type\n    FROM raw.conversion_events\n    WHERE conversion_date >= CURRENT_DATE - INTERVAL '90 days'\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/marketing_attribution_pipeline.sql",
+        "type": "sql",
+        "file_name": "marketing_attribution_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 19
+      }
+    },
+    {
+      "content": "attribution_models AS (\n    SELECT \n        cj.customer_id,\n        cj.touchpoint_id,\n        cj.channel,\n        cj.campaign_id,\n        cj.touchpoint_date,\n        ce.conversion_value,\n        ce.conversion_date,\n        -- First Touch Attribution\n        CASE WHEN cj.touchpoint_sequence = 1 THEN ce.conversion_value ELSE 0 END as first_touch_credit,\n        -- Last Touch Attribution",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/marketing_attribution_pipeline.sql",
+        "type": "sql",
+        "file_name": "marketing_attribution_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 31
+      }
+    },
+    {
+      "content": "-- Last Touch Attribution\n        CASE WHEN cj.touchpoint_sequence = cj.total_touchpoints THEN ce.conversion_value ELSE 0 END as last_touch_credit,\n        -- Linear Attribution\n        CASE WHEN ce.conversion_value IS NOT NULL THEN ce.conversion_value / cj.total_touchpoints ELSE 0 END as linear_credit\n    FROM customer_journey cj\n    LEFT JOIN conversion_events ce ON cj.customer_id = ce.customer_id\n)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/marketing_attribution_pipeline.sql",
+        "type": "sql",
+        "file_name": "marketing_attribution_pipeline.sql",
+        "chunk_index": 4,
+        "chunk_size": 46
+      }
+    },
+    {
+      "content": "-- Risk Management Pipeline\n-- Purpose: Comprehensive risk assessment and monitoring\n-- Owner: data-risk team\n-- SLA: Real-time (<30 seconds)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/risk_management_pipeline.sql",
+        "type": "sql",
+        "file_name": "risk_management_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 20
+      }
+    },
+    {
+      "content": "WITH transaction_risk AS (\n    SELECT \n        transaction_id,\n        customer_id,\n        transaction_amount,\n        transaction_date,\n        transaction_type,\n        CASE \n            WHEN transaction_amount > 100000 THEN 0.8\n            WHEN transaction_amount > 50000 THEN 0.6\n            WHEN transaction_amount > 10000 THEN 0.4\n            ELSE 0.2\n        END as amount_risk_score,\n        CASE \n            WHEN transaction_type IN ('WIRE_TRANSFER', 'CASH_WITHDRAWAL') THEN 0.7",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/risk_management_pipeline.sql",
+        "type": "sql",
+        "file_name": "risk_management_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 42
+      }
+    },
+    {
+      "content": "WHEN transaction_type IN ('ONLINE_PAYMENT', 'CARD_PAYMENT') THEN 0.3\n            ELSE 0.1\n        END as type_risk_score\n    FROM raw.transaction_data\n    WHERE transaction_date >= CURRENT_DATE - INTERVAL '1 day'\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/risk_management_pipeline.sql",
+        "type": "sql",
+        "file_name": "risk_management_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 23
+      }
+    },
+    {
+      "content": "customer_risk_profiles AS (\n    SELECT \n        customer_id,\n        customer_type,\n        credit_score,\n        account_age_days,\n        CASE \n            WHEN credit_score < 600 THEN 0.9\n            WHEN credit_score < 700 THEN 0.6\n            WHEN credit_score < 800 THEN 0.3\n            ELSE 0.1\n        END as credit_risk_score\n    FROM raw.customer_data\n)\n\nSELECT * FROM transaction_risk",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/risk_management_pipeline.sql",
+        "type": "sql",
+        "file_name": "risk_management_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 39
+      }
+    },
+    {
+      "content": "-- Data Quality Monitoring Pipeline\n-- Purpose: Automated data quality checks and monitoring\n-- Owner: data-quality team\n-- SLA: Hourly checks",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/data_quality_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "data_quality_monitoring_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 21
+      }
+    },
+    {
+      "content": "WITH quality_checks AS (\n    SELECT \n        table_name,\n        check_type,\n        check_date,\n        total_records,\n        failed_records,\n        CASE \n            WHEN total_records > 0 THEN failed_records / total_records\n            ELSE 0\n        END as failure_rate,\n        CASE \n            WHEN failed_records / total_records > 0.01 THEN 'CRITICAL'\n            WHEN failed_records / total_records > 0.001 THEN 'HIGH'",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/data_quality_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "data_quality_monitoring_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 41
+      }
+    },
+    {
+      "content": "WHEN failed_records / total_records > 0.0001 THEN 'MEDIUM'\n            ELSE 'LOW'\n        END as quality_status\n    FROM raw.data_quality_results\n    WHERE check_date >= CURRENT_DATE - INTERVAL '1 day'\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/data_quality_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "data_quality_monitoring_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 24
+      }
+    },
+    {
+      "content": "quality_summary AS (\n    SELECT \n        table_name,\n        COUNT(*) as total_checks,\n        COUNT(CASE WHEN quality_status = 'CRITICAL' THEN 1 END) as critical_issues,\n        COUNT(CASE WHEN quality_status = 'HIGH' THEN 1 END) as high_issues,\n        AVG(failure_rate) as avg_failure_rate\n    FROM quality_checks\n    GROUP BY table_name\n)\n\nSELECT * FROM quality_summary",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/data_quality_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "data_quality_monitoring_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 41
+      }
+    },
+    {
+      "content": "-- HR Analytics Pipeline\n-- Purpose: Employee lifecycle analytics and talent management\n-- Owner: data-hr team\n-- SLA: Monthly by 5th of month",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/hr_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "hr_analytics_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 23
+      }
+    },
+    {
+      "content": "WITH employee_metrics AS (\n    SELECT \n        employee_id,\n        department,\n        job_title,\n        hire_date,\n        CURRENT_DATE - hire_date as tenure_days,\n        salary,\n        manager_id,\n        AVG(performance_score) as avg_performance_score,\n        COUNT(*) as total_reviews\n    FROM raw.employee_data ed\n    LEFT JOIN raw.performance_reviews pr ON ed.employee_id = pr.employee_id\n    WHERE ed.status = 'ACTIVE'",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/hr_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "hr_analytics_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 37
+      }
+    },
+    {
+      "content": "WHERE ed.status = 'ACTIVE'\n    GROUP BY employee_id, department, job_title, hire_date, salary, manager_id\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/hr_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "hr_analytics_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 13
+      }
+    },
+    {
+      "content": "attendance_analysis AS (\n    SELECT \n        employee_id,\n        COUNT(*) as total_days_worked,\n        SUM(CASE WHEN attendance_status = 'PRESENT' THEN 1 ELSE 0 END) as days_present,\n        SUM(CASE WHEN attendance_status = 'ABSENT' THEN 1 ELSE 0 END) as days_absent,\n        AVG(hours_worked) as avg_hours_per_day\n    FROM raw.attendance_data\n    WHERE attendance_date >= CURRENT_DATE - INTERVAL '30 days'\n    GROUP BY employee_id\n)\n\nSELECT * FROM employee_metrics",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/hr_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "hr_analytics_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 53
+      }
+    },
+    {
+      "content": "-- Financial Reporting Pipeline\n-- Purpose: Comprehensive financial data processing for compliance\n-- Owner: data-finance team\n-- SLA: Daily by 8 AM",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/financial_reporting_pipeline.sql",
+        "type": "sql",
+        "file_name": "financial_reporting_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 22
+      }
+    },
+    {
+      "content": "WITH daily_transactions AS (\n    SELECT \n        transaction_id,\n        account_id,\n        transaction_date,\n        transaction_type,\n        amount,\n        description,\n        reference_number,\n        -- Financial controls\n        CASE \n            WHEN amount = 0 THEN 'ZERO_AMOUNT'\n            WHEN ABS(amount) > 1000000 THEN 'LARGE_TRANSACTION'\n            WHEN transaction_type NOT IN ('DEBIT', 'CREDIT') THEN 'INVALID_TYPE'\n            ELSE 'VALID'\n        END as validation_status",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/financial_reporting_pipeline.sql",
+        "type": "sql",
+        "file_name": "financial_reporting_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 41
+      }
+    },
+    {
+      "content": "END as validation_status\n    FROM raw.general_ledger\n    WHERE transaction_date = CURRENT_DATE - INTERVAL '1 day'\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/financial_reporting_pipeline.sql",
+        "type": "sql",
+        "file_name": "financial_reporting_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 14
+      }
+    },
+    {
+      "content": "account_balances AS (\n    SELECT \n        account_id,\n        SUM(CASE WHEN transaction_type = 'CREDIT' THEN amount ELSE -amount END) as current_balance,\n        COUNT(*) as transaction_count,\n        SUM(ABS(amount)) as total_activity\n    FROM daily_transactions\n    WHERE validation_status = 'VALID'\n    GROUP BY account_id\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/financial_reporting_pipeline.sql",
+        "type": "sql",
+        "file_name": "financial_reporting_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 33
+      }
+    },
+    {
+      "content": "reconciliation_summary AS (\n    SELECT \n        'BANK_RECONCILIATION' as reconciliation_type,\n        COUNT(*) as total_transactions,\n        SUM(amount) as net_amount,\n        COUNT(CASE WHEN validation_status != 'VALID' THEN 1 END) as validation_errors,\n        CURRENT_DATE - INTERVAL '1 day' as reconciliation_date\n    FROM daily_transactions\n    WHERE account_id LIKE 'BANK_%'\n)\n\nSELECT * FROM reconciliation_summary",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/financial_reporting_pipeline.sql",
+        "type": "sql",
+        "file_name": "financial_reporting_pipeline.sql",
+        "chunk_index": 4,
+        "chunk_size": 41
+      }
+    },
+    {
+      "content": "-- Supply Chain Analytics Pipeline\n-- Purpose: End-to-end supply chain optimization and monitoring\n-- Owner: data-supply-chain team\n-- SLA: Daily by 7 AM",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/supply_chain_pipeline.sql",
+        "type": "sql",
+        "file_name": "supply_chain_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 23
+      }
+    },
+    {
+      "content": "WITH supplier_performance AS (\n    SELECT \n        supplier_id,\n        supplier_name,\n        COUNT(*) as total_orders,\n        AVG(delivery_time_days) as avg_delivery_time,\n        COUNT(CASE WHEN delivery_date <= promised_date THEN 1 END) / COUNT(*) as on_time_delivery_rate,\n        AVG(quality_score) as avg_quality_score,\n        SUM(order_value) as total_order_value\n    FROM raw.supplier_performance\n    WHERE order_date >= CURRENT_DATE - INTERVAL '90 days'",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/supply_chain_pipeline.sql",
+        "type": "sql",
+        "file_name": "supply_chain_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 41
+      }
+    },
+    {
+      "content": "logistics_metrics AS (\n    SELECT \n        route_id,\n        origin_location,\n        destination_location,\n        COUNT(*) as total_shipments,\n        AVG(transit_time_hours) as avg_transit_time,\n        AVG(shipping_cost) as avg_shipping_cost,\n        COUNT(CASE WHEN delivery_status = 'ON_TIME' THEN 1 END) / COUNT(*) as delivery_success_rate\n    FROM raw.logistics_data\n    WHERE shipment_date >= CURRENT_DATE - INTERVAL '30 days'\n    GROUP BY route_id, origin_location, destination_location\n)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/supply_chain_pipeline.sql",
+        "type": "sql",
+        "file_name": "supply_chain_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 44
+      }
+    },
+    {
+      "content": "-- Incident Response Pipeline\n-- Purpose: Automated incident detection and response\n-- Owner: data-platform team\n-- SLA: Real-time monitoring",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/incident_response_pipeline.sql",
+        "type": "sql",
+        "file_name": "incident_response_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 19
+      }
+    },
+    {
+      "content": "WITH incident_detection AS (\n    SELECT \n        pipeline_id,\n        pipeline_name,\n        failure_time,\n        error_message,\n        severity_level,\n        CASE \n            WHEN error_message LIKE '%CRITICAL%' THEN 'P0'\n            WHEN error_message LIKE '%HIGH%' THEN 'P1'\n            WHEN error_message LIKE '%MEDIUM%' THEN 'P2'\n            ELSE 'P3'\n        END as incident_severity\n    FROM raw.pipeline_logs\n    WHERE failure_time >= CURRENT_DATE - INTERVAL '1 day'",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/incident_response_pipeline.sql",
+        "type": "sql",
+        "file_name": "incident_response_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 44
+      }
+    },
+    {
+      "content": "impact_assessment AS (\n    SELECT \n        id.pipeline_id,\n        id.pipeline_name,\n        id.incident_severity,\n        COUNT(DISTINCT ld.downstream_table) as affected_downstream_tables,\n        COUNT(DISTINCT ld.dashboard_id) as affected_dashboards\n    FROM incident_detection id\n    LEFT JOIN raw.lineage_dependencies ld ON id.pipeline_id = ld.source_pipeline\n    GROUP BY id.pipeline_id, id.pipeline_name, id.incident_severity\n)\n\nSELECT * FROM impact_assessment",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/incident_response_pipeline.sql",
+        "type": "sql",
+        "file_name": "incident_response_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 36
+      }
+    },
+    {
+      "content": "-- SLA Monitoring Pipeline\n-- Purpose: Track SLA compliance across all pipelines\n-- Owner: data-platform team\n-- SLA: Daily reporting",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/sla_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "sla_monitoring_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 20
+      }
+    },
+    {
+      "content": "WITH pipeline_performance AS (\n    SELECT \n        pipeline_id,\n        pipeline_name,\n        execution_date,\n        start_time,\n        end_time,\n        CASE \n            WHEN end_time IS NULL THEN NULL\n            ELSE EXTRACT(EPOCH FROM (end_time - start_time)) / 3600\n        END as execution_hours,\n        status,\n        sla_hours\n    FROM raw.pipeline_executions\n    WHERE execution_date >= CURRENT_DATE - INTERVAL '7 days'\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/sla_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "sla_monitoring_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 41
+      }
+    },
+    {
+      "content": "sla_compliance AS (\n    SELECT \n        pipeline_id,\n        pipeline_name,\n        COUNT(*) as total_executions,\n        COUNT(CASE WHEN status = 'SUCCESS' THEN 1 END) as successful_executions,\n        COUNT(CASE WHEN execution_hours <= sla_hours THEN 1 END) as sla_compliant_executions,\n        AVG(execution_hours) as avg_execution_time,\n        sla_hours\n    FROM pipeline_performance\n    WHERE execution_hours IS NOT NULL\n    GROUP BY pipeline_id, pipeline_name, sla_hours\n)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/sla_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "sla_monitoring_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 46
+      }
+    },
+    {
+      "content": "-- Sales Orders Pipeline\n-- Purpose: Transform raw order data into curated sales orders\n-- Owner: data-sales team\n-- SLA: 2 hours freshness",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/sales_orders_pipeline.sql",
+        "type": "sql",
+        "file_name": "sales_orders_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 23
+      }
+    },
+    {
+      "content": "WITH cleaned_orders AS (\n    SELECT \n        order_id,\n        customer_id,\n        product_id,\n        order_date,\n        quantity,\n        unit_price,\n        -- Data quality checks\n        CASE \n            WHEN quantity > 0 AND unit_price > 0 THEN quantity * unit_price\n            ELSE NULL \n        END AS gross_amount\n    FROM raw.sales_orders\n    WHERE \n        order_date >= CURRENT_DATE - INTERVAL '30 days'\n        AND customer_id IS NOT NULL\n        AND product_id IS NOT NULL\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/sales_orders_pipeline.sql",
+        "type": "sql",
+        "file_name": "sales_orders_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 54
+      }
+    },
+    {
+      "content": "enriched_orders AS (\n    SELECT \n        co.*,\n        c.customer_name,\n        c.customer_segment,\n        p.product_name,\n        p.category,\n        -- Calculate net amount after refunds\n        co.gross_amount - COALESCE(r.refund_amount, 0) AS net_amount\n    FROM cleaned_orders co\n    LEFT JOIN raw.customers c ON co.customer_id = c.customer_id\n    LEFT JOIN raw.products p ON co.product_id = p.product_id\n    LEFT JOIN raw.refunds r ON co.order_id = r.order_id\n)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/sales_orders_pipeline.sql",
+        "type": "sql",
+        "file_name": "sales_orders_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 49
+      }
+    },
+    {
+      "content": "INSERT INTO curated.sales_orders\nSELECT \n    order_id,\n    customer_id,\n    customer_name,\n    customer_segment,\n    product_id,\n    product_name,\n    category,\n    order_date,\n    quantity,\n    unit_price,\n    gross_amount,\n    net_amount,\n    CURRENT_TIMESTAMP AS processed_at\nFROM enriched_orders\nWHERE net_amount > 0",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/sales_orders_pipeline.sql",
+        "type": "sql",
+        "file_name": "sales_orders_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 25
+      }
+    },
+    {
+      "content": "-- Customer Analytics Pipeline\n-- Purpose: Generate customer behavior analytics\n-- Owner: data-analytics team\n-- Dependencies: curated.sales_orders, curated.customers",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/customer_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "customer_analytics_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 18
+      }
+    },
+    {
+      "content": "WITH customer_metrics AS (\n    SELECT \n        customer_id,\n        COUNT(DISTINCT order_date) AS active_days,\n        COUNT(*) AS total_orders,\n        SUM(net_amount) AS lifetime_value,\n        AVG(net_amount) AS avg_order_value,\n        MAX(order_date) AS last_order_date,\n        MIN(order_date) AS first_order_date\n    FROM curated.sales_orders\n    WHERE order_date >= CURRENT_DATE - INTERVAL '90 days'\n    GROUP BY customer_id\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/customer_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "customer_analytics_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 39
+      }
+    },
+    {
+      "content": "customer_segments AS (\n    SELECT \n        customer_id,\n        CASE \n            WHEN lifetime_value > 1000 THEN 'High Value'\n            WHEN lifetime_value > 500 THEN 'Medium Value'\n            ELSE 'Low Value'\n        END AS value_segment,\n        CASE \n            WHEN active_days >= 10 THEN 'Frequent'\n            WHEN active_days >= 5 THEN 'Regular'\n            ELSE 'Occasional'\n        END AS frequency_segment\n    FROM customer_metrics\n)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/customer_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "customer_analytics_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 47
+      }
+    },
+    {
+      "content": "INSERT INTO analytics.customer_behavior\nSELECT \n    cm.customer_id,\n    cm.active_days,\n    cm.total_orders,\n    cm.lifetime_value,\n    cm.avg_order_value,\n    cm.last_order_date,\n    cm.first_order_date,\n    cs.value_segment,\n    cs.frequency_segment,\n    CURRENT_TIMESTAMP AS processed_at\nFROM customer_metrics cm\nJOIN customer_segments cs ON cm.customer_id = cs.customer_id",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/customer_analytics_pipeline.sql",
+        "type": "sql",
+        "file_name": "customer_analytics_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 26
+      }
+    },
+    {
+      "content": "-- Escalation Monitoring Pipeline\n-- Purpose: Track incident escalation patterns and response times\n-- Owner: data-platform team\n-- SLA: Real-time monitoring",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/escalation_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "escalation_monitoring_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 21
+      }
+    },
+    {
+      "content": "WITH incident_timeline AS (\n    SELECT \n        incident_id,\n        incident_type,\n        severity_level,\n        created_time,\n        acknowledged_time,\n        resolved_time,\n        CASE \n            WHEN acknowledged_time IS NOT NULL THEN \n                EXTRACT(EPOCH FROM (acknowledged_time - created_time)) / 60\n            ELSE NULL\n        END as acknowledgment_minutes,\n        CASE \n            WHEN resolved_time IS NOT NULL THEN",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/escalation_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "escalation_monitoring_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 37
+      }
+    },
+    {
+      "content": "WHEN resolved_time IS NOT NULL THEN \n                EXTRACT(EPOCH FROM (resolved_time - created_time)) / 60\n            ELSE NULL\n        END as resolution_minutes\n    FROM raw.incident_logs\n    WHERE created_time >= CURRENT_DATE - INTERVAL '30 days'\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/escalation_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "escalation_monitoring_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 29
+      }
+    },
+    {
+      "content": "escalation_analysis AS (\n    SELECT \n        severity_level,\n        COUNT(*) as total_incidents,\n        AVG(acknowledgment_minutes) as avg_acknowledgment_time,\n        AVG(resolution_minutes) as avg_resolution_time,\n        COUNT(CASE WHEN acknowledgment_minutes > 30 THEN 1 END) as late_acknowledgments,\n        COUNT(CASE WHEN resolution_minutes > 240 THEN 1 END) as late_resolutions\n    FROM incident_timeline\n    WHERE acknowledgment_minutes IS NOT NULL\n    GROUP BY severity_level\n)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/escalation_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "escalation_monitoring_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 45
+      }
+    },
+    {
+      "content": "-- Revenue Summary Pipeline  \n-- Purpose: Create daily revenue summaries for reporting\n-- Owner: data-sales team\n-- Dependencies: curated.sales_orders",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/revenue_summary_pipeline.sql",
+        "type": "sql",
+        "file_name": "revenue_summary_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 19
+      }
+    },
+    {
+      "content": "WITH daily_revenue AS (\n    SELECT \n        DATE(order_date) AS revenue_date,\n        customer_segment,\n        category,\n        COUNT(*) AS order_count,\n        SUM(net_amount) AS total_revenue,\n        AVG(net_amount) AS avg_order_value,\n        SUM(quantity) AS total_quantity\n    FROM curated.sales_orders\n    WHERE order_date >= CURRENT_DATE - INTERVAL '7 days'\n    GROUP BY DATE(order_date), customer_segment, category\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/revenue_summary_pipeline.sql",
+        "type": "sql",
+        "file_name": "revenue_summary_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 38
+      }
+    },
+    {
+      "content": "segment_totals AS (\n    SELECT \n        revenue_date,\n        customer_segment,\n        SUM(total_revenue) AS segment_revenue,\n        SUM(order_count) AS segment_orders\n    FROM daily_revenue\n    GROUP BY revenue_date, customer_segment\n)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/revenue_summary_pipeline.sql",
+        "type": "sql",
+        "file_name": "revenue_summary_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 19
+      }
+    },
+    {
+      "content": "INSERT INTO curated.revenue_summary\nSELECT \n    dr.revenue_date,\n    dr.customer_segment,\n    dr.category,\n    dr.order_count,\n    dr.total_revenue,\n    dr.avg_order_value,\n    dr.total_quantity,\n    st.segment_revenue,\n    st.segment_orders,\n    CURRENT_TIMESTAMP AS processed_at\nFROM daily_revenue dr\nLEFT JOIN segment_totals st \n    ON dr.revenue_date = st.revenue_date \n    AND dr.customer_segment = st.customer_segment",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/revenue_summary_pipeline.sql",
+        "type": "sql",
+        "file_name": "revenue_summary_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 31
+      }
+    },
+    {
+      "content": "-- Compliance Monitoring Pipeline\n-- Purpose: Automated compliance monitoring and reporting\n-- Owner: data-compliance team\n-- SLA: Real-time (<10 seconds)",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/compliance_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "compliance_monitoring_pipeline.sql",
+        "chunk_index": 0,
+        "chunk_size": 20
+      }
+    },
+    {
+      "content": "WITH audit_log_analysis AS (\n    SELECT \n        log_id,\n        user_id,\n        action_type,\n        resource_accessed,\n        access_time,\n        ip_address,\n        user_role,\n        CASE \n            WHEN action_type = 'UNAUTHORIZED_ACCESS' THEN 'CRITICAL'\n            WHEN action_type = 'DATA_EXPORT' AND user_role NOT IN ('ADMIN', 'COMPLIANCE') THEN 'HIGH'\n            WHEN access_time NOT BETWEEN '09:00:00' AND '17:00:00' THEN 'MEDIUM'\n            ELSE 'LOW'\n        END as risk_level",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/compliance_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "compliance_monitoring_pipeline.sql",
+        "chunk_index": 1,
+        "chunk_size": 45
+      }
+    },
+    {
+      "content": "ELSE 'LOW'\n        END as risk_level\n    FROM raw.audit_logs\n    WHERE access_time >= CURRENT_DATE - INTERVAL '1 day'\n),",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/compliance_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "compliance_monitoring_pipeline.sql",
+        "chunk_index": 2,
+        "chunk_size": 16
+      }
+    },
+    {
+      "content": "data_access_patterns AS (\n    SELECT \n        user_id,\n        COUNT(*) as total_accesses,\n        COUNT(DISTINCT resource_accessed) as unique_resources,\n        COUNT(CASE WHEN action_type = 'DATA_EXPORT' THEN 1 END) as export_actions,\n        MAX(access_time) as last_access_time\n    FROM audit_log_analysis\n    GROUP BY user_id\n)\n\nSELECT * FROM audit_log_analysis",
+      "metadata": {
+        "source": "/Users/sandeepgogineni/ai-engineering/bootcamp/Traceback/data/repo/compliance_monitoring_pipeline.sql",
+        "type": "sql",
+        "file_name": "compliance_monitoring_pipeline.sql",
+        "chunk_index": 3,
+        "chunk_size": 35
+      }
+    }
+  ],
+  "lineage": {
+    "nodes": [
+      {
+        "id": "raw.sales_orders",
+        "type": "table",
+        "schema": "raw",
+        "owners": [
+          "data-platform"
+        ],
+        "description": "Raw order data from e-commerce platform"
+      },
+      {
+        "id": "raw.customers",
+        "type": "table",
+        "schema": "raw",
+        "owners": [
+          "data-platform"
+        ],
+        "description": "Customer master data"
+      },
+      {
+        "id": "raw.products",
+        "type": "table",
+        "schema": "raw",
+        "owners": [
+          "data-platform"
+        ],
+        "description": "Product catalog"
+      },
+      {
+        "id": "raw.refunds",
+        "type": "table",
+        "schema": "raw",
+        "owners": [
+          "data-platform"
+        ],
+        "description": "Refund transaction data"
+      },
+      {
+        "id": "curated.sales_orders",
+        "type": "table",
+        "schema": "curated",
+        "owners": [
+          "data-sales"
+        ],
+        "description": "Cleaned and enriched sales orders"
+      },
+      {
+        "id": "curated.revenue_summary",
+        "type": "table",
+        "schema": "curated",
+        "owners": [
+          "data-sales"
+        ],
+        "description": "Daily revenue summaries"
+      },
+      {
+        "id": "curated.customers",
+        "type": "table",
+        "schema": "curated",
+        "owners": [
+          "data-sales"
+        ],
+        "description": "Enriched customer data"
+      },
+      {
+        "id": "analytics.customer_behavior",
+        "type": "table",
+        "schema": "analytics",
+        "owners": [
+          "data-analytics"
+        ],
+        "description": "Customer behavior analytics"
+      },
+      {
+        "id": "curated.sales_orders.order_id",
+        "type": "column",
+        "table": "curated.sales_orders",
+        "data_type": "varchar",
+        "description": "Unique order identifier"
+      },
+      {
+        "id": "curated.sales_orders.customer_id",
+        "type": "column",
+        "table": "curated.sales_orders",
+        "data_type": "varchar",
+        "description": "Customer identifier"
+      },
+      {
+        "id": "curated.sales_orders.net_amount",
+        "type": "column",
+        "table": "curated.sales_orders",
+        "data_type": "decimal",
+        "description": "Net order amount after refunds"
+      },
+      {
+        "id": "curated.revenue_summary.total_revenue",
+        "type": "column",
+        "table": "curated.revenue_summary",
+        "data_type": "decimal",
+        "description": "Total daily revenue"
+      },
+      {
+        "id": "analytics.customer_behavior.lifetime_value",
+        "type": "column",
+        "table": "analytics.customer_behavior",
+        "data_type": "decimal",
+        "description": "Customer lifetime value"
+      }
+    ],
+    "edges": [
+      {
+        "from": "raw.sales_orders",
+        "to": "curated.sales_orders",
+        "operation": "clean+enrich",
+        "pipeline": "sales_orders_pipeline.sql"
+      },
+      {
+        "from": "raw.customers",
+        "to": "curated.sales_orders",
+        "operation": "join",
+        "pipeline": "sales_orders_pipeline.sql"
+      },
+      {
+        "from": "raw.products",
+        "to": "curated.sales_orders",
+        "operation": "join",
+        "pipeline": "sales_orders_pipeline.sql"
+      },
+      {
+        "from": "raw.refunds",
+        "to": "curated.sales_orders",
+        "operation": "subtract",
+        "pipeline": "sales_orders_pipeline.sql"
+      },
+      {
+        "from": "curated.sales_orders",
+        "to": "curated.revenue_summary",
+        "operation": "aggregate",
+        "pipeline": "revenue_summary_pipeline.sql"
+      },
+      {
+        "from": "curated.sales_orders",
+        "to": "analytics.customer_behavior",
+        "operation": "aggregate",
+        "pipeline": "customer_analytics_pipeline.sql"
+      },
+      {
+        "from": "curated.customers",
+        "to": "analytics.customer_behavior",
+        "operation": "join",
+        "pipeline": "customer_analytics_pipeline.sql"
+      },
+      {
+        "from": "raw.sales_orders.order_id",
+        "to": "curated.sales_orders.order_id",
+        "operation": "copy"
+      },
+      {
+        "from": "raw.sales_orders.customer_id",
+        "to": "curated.sales_orders.customer_id",
+        "operation": "copy"
+      },
+      {
+        "from": "raw.sales_orders.quantity",
+        "to": "curated.sales_orders.net_amount",
+        "operation": "calculate"
+      },
+      {
+        "from": "raw.sales_orders.unit_price",
+        "to": "curated.sales_orders.net_amount",
+        "operation": "calculate"
+      },
+      {
+        "from": "curated.sales_orders.net_amount",
+        "to": "curated.revenue_summary.total_revenue",
+        "operation": "sum"
+      },
+      {
+        "from": "curated.sales_orders.net_amount",
+        "to": "analytics.customer_behavior.lifetime_value",
+        "operation": "sum"
+      }
+    ],
+    "dashboards": [
+      {
+        "id": "bi.daily_sales",
+        "name": "Daily Sales Dashboard",
+        "tables": [
+          "curated.sales_orders",
+          "curated.revenue_summary"
+        ],
+        "teams": [
+          "Finance",
+          "Sales",
+          "Executive"
+        ],
+        "description": "Executive dashboard showing daily sales performance",
+        "refresh_frequency": "hourly"
+      },
+      {
+        "id": "bi.customer_analytics",
+        "name": "Customer Analytics Dashboard",
+        "tables": [
+          "analytics.customer_behavior",
+          "curated.customers"
+        ],
+        "teams": [
+          "Marketing",
+          "Product"
+        ],
+        "description": "Customer behavior and segmentation analytics",
+        "refresh_frequency": "daily"
+      },
+      {
+        "id": "ops.data_quality",
+        "name": "Data Quality Monitoring",
+        "tables": [
+          "curated.sales_orders",
+          "curated.revenue_summary"
+        ],
+        "teams": [
+          "Data Engineering",
+          "Platform"
+        ],
+        "description": "Data quality metrics and monitoring",
+        "refresh_frequency": "real-time"
+      }
+    ],
+    "pipelines": [
+      {
+        "id": "sales_orders_pipeline",
+        "name": "Sales Orders Pipeline",
+        "file": "sales_orders_pipeline.sql",
+        "schedule": "hourly",
+        "owner": "data-sales",
+        "dependencies": [
+          "raw.sales_orders",
+          "raw.customers",
+          "raw.products"
+        ],
+        "outputs": [
+          "curated.sales_orders"
+        ]
+      },
+      {
+        "id": "revenue_summary_pipeline",
+        "name": "Revenue Summary Pipeline",
+        "file": "revenue_summary_pipeline.sql",
+        "schedule": "daily",
+        "owner": "data-sales",
+        "dependencies": [
+          "curated.sales_orders"
+        ],
+        "outputs": [
+          "curated.revenue_summary"
+        ]
+      },
+      {
+        "id": "customer_analytics_pipeline",
+        "name": "Customer Analytics Pipeline",
+        "file": "customer_analytics_pipeline.sql",
+        "schedule": "daily",
+        "owner": "data-analytics",
+        "dependencies": [
+          "curated.sales_orders",
+          "curated.customers"
+        ],
+        "outputs": [
+          "analytics.customer_behavior"
+        ]
+      }
+    ]
+  },
+  "stats": {
+    "total_chunks": 102,
+    "markdown_chunks": 42,
+    "sql_chunks": 60,
+    "lineage_nodes": 13,
+    "processing_time": 0.005749940872192383
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "nodes": [
+    {
+      "id": "raw.sales_orders",
+      "type": "table",
+      "schema": "raw",
+      "owners": [
+        "data-platform"
+      ],
+      "description": "Raw order data from e-commerce platform"
+    },
+    {
+      "id": "raw.customers",
+      "type": "table",
+      "schema": "raw",
+      "owners": [
+        "data-platform"
+      ],
+      "description": "Customer master data"
+    },
+    {
+      "id": "raw.products",
+      "type": "table",
+      "schema": "raw",
+      "owners": [
+        "data-platform"
+      ],
+      "description": "Product catalog"
+    },
+    {
+      "id": "raw.refunds",
+      "type": "table",
+      "schema": "raw",
+      "owners": [
+        "data-platform"
+      ],
+      "description": "Refund transaction data"
+    },
+    {
+      "id": "curated.sales_orders",
+      "type": "table",
+      "schema": "curated",
+      "owners": [
+        "data-sales"
+      ],
+      "description": "Cleaned and enriched sales orders"
+    },
+    {
+      "id": "curated.revenue_summary",
+      "type": "table",
+      "schema": "curated",
+      "owners": [
+        "data-sales"
+      ],
+      "description": "Daily revenue summaries"
+    },
+    {
+      "id": "curated.customers",
+      "type": "table",
+      "schema": "curated",
+      "owners": [
+        "data-sales"
+      ],
+      "description": "Enriched customer data"
+    },
+    {
+      "id": "analytics.customer_behavior",
+      "type": "table",
+      "schema": "analytics",
+      "owners": [
+        "data-analytics"
+      ],
+      "description": "Customer behavior analytics"
+    },
+    {
+      "id": "curated.sales_orders.order_id",
+      "type": "column",
+      "table": "curated.sales_orders",
+      "data_type": "varchar",
+      "description": "Unique order identifier"
+    },
+    {
+      "id": "curated.sales_orders.customer_id",
+      "type": "column",
+      "table": "curated.sales_orders",
+      "data_type": "varchar",
+      "description": "Customer identifier"
+    },
+    {
+      "id": "curated.sales_orders.net_amount",
+      "type": "column",
+      "table": "curated.sales_orders",
+      "data_type": "decimal",
+      "description": "Net order amount after refunds"
+    },
+    {
+      "id": "curated.revenue_summary.total_revenue",
+      "type": "column",
+      "table": "curated.revenue_summary",
+      "data_type": "decimal",
+      "description": "Total daily revenue"
+    },
+    {
+      "id": "analytics.customer_behavior.lifetime_value",
+      "type": "column",
+      "table": "analytics.customer_behavior",
+      "data_type": "decimal",
+      "description": "Customer lifetime value"
+    }
+  ],
+  "edges": [
+    {
+      "from": "raw.sales_orders",
+      "to": "curated.sales_orders",
+      "operation": "clean+enrich",
+      "pipeline": "sales_orders_pipeline.sql"
+    },
+    {
+      "from": "raw.customers",
+      "to": "curated.sales_orders",
+      "operation": "join",
+      "pipeline": "sales_orders_pipeline.sql"
+    },
+    {
+      "from": "raw.products",
+      "to": "curated.sales_orders",
+      "operation": "join",
+      "pipeline": "sales_orders_pipeline.sql"
+    },
+    {
+      "from": "raw.refunds",
+      "to": "curated.sales_orders",
+      "operation": "subtract",
+      "pipeline": "sales_orders_pipeline.sql"
+    },
+    {
+      "from": "curated.sales_orders",
+      "to": "curated.revenue_summary",
+      "operation": "aggregate",
+      "pipeline": "revenue_summary_pipeline.sql"
+    },
+    {
+      "from": "curated.sales_orders",
+      "to": "analytics.customer_behavior",
+      "operation": "aggregate",
+      "pipeline": "customer_analytics_pipeline.sql"
+    },
+    {
+      "from": "curated.customers",
+      "to": "analytics.customer_behavior",
+      "operation": "join",
+      "pipeline": "customer_analytics_pipeline.sql"
+    },
+    {
+      "from": "raw.sales_orders.order_id",
+      "to": "curated.sales_orders.order_id",
+      "operation": "copy"
+    },
+    {
+      "from": "raw.sales_orders.customer_id",
+      "to": "curated.sales_orders.customer_id",
+      "operation": "copy"
+    },
+    {
+      "from": "raw.sales_orders.quantity",
+      "to": "curated.sales_orders.net_amount",
+      "operation": "calculate"
+    },
+    {
+      "from": "raw.sales_orders.unit_price",
+      "to": "curated.sales_orders.net_amount",
+      "operation": "calculate"
+    },
+    {
+      "from": "curated.sales_orders.net_amount",
+      "to": "curated.revenue_summary.total_revenue",
+      "operation": "sum"
+    },
+    {
+      "from": "curated.sales_orders.net_amount",
+      "to": "analytics.customer_behavior.lifetime_value",
+      "operation": "sum"
+    }
+  ],
+  "dashboards": [
+    {
+      "id": "bi.daily_sales",
+      "name": "Daily Sales Dashboard",
+      "tables": [
+        "curated.sales_orders",
+        "curated.revenue_summary"
+      ],
+      "teams": [
+        "Finance",
+        "Sales",
+        "Executive"
+      ],
+      "description": "Executive dashboard showing daily sales performance",
+      "refresh_frequency": "hourly"
+    },
+    {
+      "id": "bi.customer_analytics",
+      "name": "Customer Analytics Dashboard",
+      "tables": [
+        "analytics.customer_behavior",
+        "curated.customers"
+      ],
+      "teams": [
+        "Marketing",
+        "Product"
+      ],
+      "description": "Customer behavior and segmentation analytics",
+      "refresh_frequency": "daily"
+    },
+    {
+      "id": "ops.data_quality",
+      "name": "Data Quality Monitoring",
+      "tables": [
+        "curated.sales_orders",
+        "curated.revenue_summary"
+      ],
+      "teams": [
+        "Data Engineering",
+        "Platform"
+      ],
+      "description": "Data quality metrics and monitoring",
+      "refresh_frequency": "real-time"
+    }
+  ],
+  "pipelines": [
+    {
+      "id": "sales_orders_pipeline",
+      "name": "Sales Orders Pipeline",
+      "file": "sales_orders_pipeline.sql",
+      "schedule": "hourly",
+      "owner": "data-sales",
+      "dependencies": [
+        "raw.sales_orders",
+        "raw.customers",
+        "raw.products"
+      ],
+      "outputs": [
+        "curated.sales_orders"
+      ]
+    },
+    {
+      "id": "revenue_summary_pipeline",
+      "name": "Revenue Summary Pipeline",
+      "file": "revenue_summary_pipeline.sql",
+      "schedule": "daily",
+      "owner": "data-sales",
+      "dependencies": [
+        "curated.sales_orders"
+      ],
+      "outputs": [
+        "curated.revenue_summary"
+      ]
+    },
+    {
+      "id": "customer_analytics_pipeline",
+      "name": "Customer Analytics Pipeline",
+      "file": "customer_analytics_pipeline.sql",
+      "schedule": "daily",
+      "owner": "data-analytics",
+      "dependencies": [
+        "curated.sales_orders",
+        "curated.customers"
+      ],
+      "outputs": [
+        "analytics.customer_behavior"
+      ]
+    }
+  ]
+}
