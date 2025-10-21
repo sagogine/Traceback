@@ -19,7 +19,9 @@ import uvicorn
 # Add src to path for imports
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+# Add the project root (src's parent) to Python path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
 
 # Import our core system components
 from tracebackcore.core import traceback_graph, lineage_retriever, vectorstore, initialize_system
@@ -217,8 +219,19 @@ async def get_lineage(table_name: str):
 @app.get("/system/stats")
 async def get_system_stats():
     """Get system statistics."""
+    # Get document count from Qdrant collection info
+    vectorstore_count = 0
+    if vectorstore:
+        try:
+            # Get collection info to determine document count
+            collection_info = vectorstore.client.get_collection(vectorstore.collection_name)
+            vectorstore_count = collection_info.points_count
+        except Exception as e:
+            print(f"Warning: Could not get vectorstore count: {e}")
+            vectorstore_count = 0
+    
     stats = {
-        "vectorstore_documents": len(vectorstore.documents) if vectorstore else 0,
+        "vectorstore_documents": vectorstore_count,
         "lineage_nodes": len(lineage_retriever.lineage_data.get("nodes", [])) if lineage_retriever else 0,
         "lineage_edges": len(lineage_retriever.lineage_data.get("edges", [])) if lineage_retriever else 0,
         "uptime": time.time(),
