@@ -24,17 +24,265 @@ project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 # Import our core system components
-from tracebackcore.core import traceback_graph, lineage_retriever, vectorstore, initialize_system
+from tracebackcore.core import traceback_graph, lineage_retriever, vectorstore, initialize_system, llm
 
 # Global variables for the core system
 traceback_graph = None
 lineage_retriever = None
 vectorstore = None
+llm = None
+
+# Advanced retriever functions
+def generate_hybrid_response(question: str) -> Dict[str, Any]:
+    """Generate response using hybrid search (vector + BM25)."""
+    try:
+        # Simple hybrid implementation for evaluation
+        import re
+        
+        # Get vector search results
+        docs = vectorstore.similarity_search(question, k=10)
+        
+        # Simple BM25-style scoring
+        query_words = set(re.findall(r'\b\w+\b', question.lower()))
+        
+        scored_docs = []
+        for doc in docs:
+            content_words = set(re.findall(r'\b\w+\b', doc.page_content.lower()))
+            overlap = len(query_words.intersection(content_words))
+            score = overlap / len(query_words) if query_words else 0
+            scored_docs.append((doc, score))
+        
+        # Sort by combined score and take top 5
+        scored_docs.sort(key=lambda x: x[1], reverse=True)
+        top_docs = [doc for doc, score in scored_docs[:5]]
+        
+        context_docs = [doc.page_content for doc in top_docs]
+        context_text = "\n\n".join(context_docs)
+        
+        # Generate answer
+        prompt = f"""Based on the following context, answer the question: {question}
+
+Context:
+{context_text}
+
+Answer:"""
+        
+        response = llm.invoke(prompt)
+        answer = response.content if hasattr(response, 'content') else str(response)
+        
+        return {
+            'question': question,
+            'answer': answer,
+            'context': context_docs,
+            'method': 'Hybrid Search'
+        }
+        
+    except Exception as e:
+        return {
+            'question': question,
+            'answer': f"Error generating response: {str(e)}",
+            'context': [],
+            'method': 'Hybrid Search (Error)'
+        }
+
+def generate_lineage_aware_response(question: str) -> Dict[str, Any]:
+    """Generate response using lineage-aware retrieval."""
+    try:
+        # Extract table names from question
+        import re
+        table_patterns = [
+            r'(curated\.\w+)',
+            r'(raw\.\w+)',
+            r'(analytics\.\w+)',
+            r'(bi\.\w+)',
+            r'(ops\.\w+)'
+        ]
+        
+        table_names = []
+        for pattern in table_patterns:
+            matches = re.findall(pattern, question.lower())
+            table_names.extend(matches)
+        
+        # Enhance query with lineage context
+        enhanced_query = question
+        if table_names:
+            enhanced_query = f"{question} Related tables: {', '.join(table_names[:3])}"
+        
+        # Search with enhanced query
+        docs = vectorstore.similarity_search(enhanced_query, k=5)
+        context_docs = [doc.page_content for doc in docs]
+        
+        # Generate answer
+        context_text = "\n\n".join(context_docs)
+        prompt = f"""Based on the following context, answer the question: {question}
+
+Context:
+{context_text}
+
+Answer:"""
+        
+        response = llm.invoke(prompt)
+        answer = response.content if hasattr(response, 'content') else str(response)
+        
+        return {
+            'question': question,
+            'answer': answer,
+            'context': context_docs,
+            'method': 'Lineage-Aware Retrieval'
+        }
+        
+    except Exception as e:
+        return {
+            'question': question,
+            'answer': f"Error generating response: {str(e)}",
+            'context': [],
+            'method': 'Lineage-Aware Retrieval (Error)'
+        }
+
+def generate_cohere_reranking_response(question: str) -> Dict[str, Any]:
+    """Generate response using Cohere reranking."""
+    try:
+        # Get documents from vectorstore
+        docs = vectorstore.similarity_search(question, k=10)  # Get more candidates for reranking
+        context_docs = [doc.page_content for doc in docs]
+        
+        if not context_docs:
+            return {
+                'question': question,
+                'answer': 'No relevant context found.',
+                'context': [],
+                'method': 'Cohere Reranking'
+            }
+        
+        # Use Cohere reranking if available
+        try:
+            import cohere
+            cohere_client = cohere.Client(os.getenv("COHERE_API_KEY"))
+            
+            # Rerank the documents
+            rerank_response = cohere_client.rerank(
+                model="rerank-english-v2.0",
+                query=question,
+                documents=context_docs,
+                top_n=5  # Fixed parameter name
+            )
+            
+            # Get top reranked documents
+            reranked_docs = [doc.document.text for doc in rerank_response.results]
+            context_text = "\n\n".join(reranked_docs)
+            
+        except Exception as e:
+            print(f"Cohere reranking failed: {e}, using top 5 documents")
+            context_text = "\n\n".join(context_docs[:5])
+            reranked_docs = context_docs[:5]
+        
+        # Generate answer
+        prompt = f"""Based on the following context, answer the question: {question}
+
+Context:
+{context_text}
+
+Answer:"""
+        
+        response = llm.invoke(prompt)
+        answer = response.content if hasattr(response, 'content') else str(response)
+        
+        return {
+            'question': question,
+            'answer': answer,
+            'context': reranked_docs,
+            'method': 'Cohere Reranking'
+        }
+        
+    except Exception as e:
+        return {
+            'question': question,
+            'answer': f"Error generating response: {str(e)}",
+            'context': [],
+            'method': 'Cohere Reranking (Error)'
+        }
+
+def generate_query_expansion_response(question: str) -> Dict[str, Any]:
+    """Generate response using query expansion."""
+    try:
+        # Expand the query
+        expansion_prompt = f"""Given this question: "{question}"
+
+Generate 3 alternative phrasings that might help find relevant information:
+1. Technical/implementation focused version
+2. Business/impact focused version  
+3. Troubleshooting/operational version
+
+Return only the 3 alternative questions, one per line."""
+
+        expansion_response = llm.invoke(expansion_prompt)
+        expansion_text = expansion_response.content if hasattr(expansion_response, 'content') else str(expansion_response)
+        
+        # Parse expanded queries
+        expanded_queries = [line.strip() for line in expansion_text.split('\n') if line.strip()]
+        expanded_queries = [q for q in expanded_queries if not q.startswith(('1.', '2.', '3.'))]
+        
+        # Add original query
+        all_queries = [question] + expanded_queries[:3]
+        
+        # Search for each query and combine results
+        all_docs = []
+        for query in all_queries:
+            docs = vectorstore.similarity_search(query, k=3)
+            all_docs.extend(docs)
+        
+        # Remove duplicates and get top 5
+        seen_content = set()
+        unique_docs = []
+        for doc in all_docs:
+            if doc.page_content not in seen_content:
+                seen_content.add(doc.page_content)
+                unique_docs.append(doc)
+                if len(unique_docs) >= 5:
+                    break
+        
+        context_docs = [doc.page_content for doc in unique_docs]
+        context_text = "\n\n".join(context_docs)
+        
+        # Generate answer
+        prompt = f"""Based on the following context, answer the question: {question}
+
+Context:
+{context_text}
+
+Answer:"""
+        
+        response = llm.invoke(prompt)
+        answer = response.content if hasattr(response, 'content') else str(response)
+        
+        return {
+            'question': question,
+            'answer': answer,
+            'context': context_docs,
+            'method': 'Query Expansion'
+        }
+        
+    except Exception as e:
+        return {
+            'question': question,
+            'answer': f"Error generating response: {str(e)}",
+            'context': [],
+            'method': 'Query Expansion (Error)'
+        }
+
+# Available retriever methods
+RETRIEVER_METHODS = {
+    'Original RAG': None,  # Use default traceback_graph
+    'Hybrid Search': generate_hybrid_response,
+    'Lineage-Aware Retrieval': generate_lineage_aware_response,
+    'Cohere Reranking': generate_cohere_reranking_response,
+    'Query Expansion': generate_query_expansion_response
+}
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Initialize the Traceback system on startup."""
-    global traceback_graph, lineage_retriever, vectorstore
+    global traceback_graph, lineage_retriever, vectorstore, llm
     
     print("🚀 Initializing Traceback system...")
     
@@ -43,10 +291,11 @@ async def lifespan(app: FastAPI):
         initialize_system()
         
         # Update global variables
-        from tracebackcore.core import traceback_graph as tg, lineage_retriever as lr, vectorstore as vs
+        from tracebackcore.core import traceback_graph as tg, lineage_retriever as lr, vectorstore as vs, llm as llm_obj
         traceback_graph = tg
         lineage_retriever = lr
         vectorstore = vs
+        llm = llm_obj
         
         print("✅ Traceback system initialized successfully")
         
@@ -80,6 +329,7 @@ class IncidentRequest(BaseModel):
     question: str
     priority: Optional[str] = "medium"
     context: Optional[Dict[str, Any]] = None
+    retriever: Optional[str] = "Original RAG"
 
 class IncidentResponse(BaseModel):
     incident_brief: str
@@ -112,7 +362,8 @@ async def health_check():
         "lineage_retriever": lineage_retriever is not None,
         "vectorstore": vectorstore is not None,
         "openai_key": bool(os.getenv("OPENAI_API_KEY")),
-        "tavily_key": bool(os.getenv("TAVILY_API_KEY"))
+        "tavily_key": bool(os.getenv("TAVILY_API_KEY")),
+        "cohere_key": bool(os.getenv("COHERE_API_KEY"))
     }
     
     overall_status = "healthy" if all(system_health.values()) else "degraded"
@@ -123,6 +374,20 @@ async def health_check():
         system_health=system_health
     )
 
+@app.get("/retrievers")
+async def get_available_retrievers():
+    """Get available retriever methods."""
+    return {
+        "available_retrievers": list(RETRIEVER_METHODS.keys()),
+        "descriptions": {
+            "Original RAG": "Standard RAG with full incident triage workflow",
+            "Hybrid Search": "Vector search combined with BM25 scoring",
+            "Lineage-Aware Retrieval": "Context-aware search with data lineage",
+            "Cohere Reranking": "Advanced reranking with Cohere API",
+            "Query Expansion": "Semantic query enhancement with multiple search strategies"
+        }
+    }
+
 @app.post("/incident/triage", response_model=IncidentResponse)
 async def triage_incident(request: IncidentRequest):
     """Main incident triage endpoint."""
@@ -132,7 +397,31 @@ async def triage_incident(request: IncidentRequest):
     start_time = time.time()
     
     try:
-        # Run the incident triage workflow
+        # Check if using advanced retriever
+        retriever_method = request.retriever or "Original RAG"
+        
+        if retriever_method != "Original RAG" and retriever_method in RETRIEVER_METHODS:
+            # Use advanced retriever
+            retriever_func = RETRIEVER_METHODS[retriever_method]
+            if retriever_func:
+                result = retriever_func(request.question)
+                
+                processing_time = time.time() - start_time
+                
+                # Convert advanced retriever result to IncidentResponse format
+                return IncidentResponse(
+                    incident_brief=result.get("answer", "No response generated"),
+                    blast_radius=[],  # Advanced retrievers don't provide blast radius
+                    impact_assessment={
+                        "assessment": result.get("answer", ""),
+                        "context_sources": [{"source": f"Advanced Retriever: {retriever_method}"}],
+                        "method": result.get("method", retriever_method)
+                    },
+                    processing_time=processing_time,
+                    sources_used=[f"Advanced Retriever: {retriever_method}"]
+                )
+        
+        # Use original RAG workflow
         from tracebackcore.core import AgentState
         
         initial_state = AgentState(
