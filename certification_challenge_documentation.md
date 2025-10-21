@@ -333,7 +333,7 @@ All relevant code is available in the GitHub repository, including:
 - **Documentation**: Comprehensive setup and usage guides
 
 #### ✅ 5-Minute Live Demo Video
-[Link to Loom video demonstrating the application]
+**Video**: https://www.loom.com/share/c472959279c14fdf816c1594ac9f1086
 
 ---
 
