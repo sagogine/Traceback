@@ -145,7 +145,7 @@ The system is evaluated using the RAGAS framework with comprehensive metrics:
 1. **Incident Triage Tab**
    - Natural language incident description input
    - Priority level selection
-   - Advanced retrieval method selection
+   - Advanced retrieval method selection dropdown (see `capture_interface.html`)
    - Real-time analysis results
 
 2. **Document Search Tab**

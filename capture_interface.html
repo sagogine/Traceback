@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traceback Interface Capture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .retriever-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .retriever-dropdown {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background-color: white;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .description {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+        .label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+        .screenshot-note {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="screenshot-note">
+            <strong>📸 Screenshot Note:</strong> This shows the Traceback web interface with the advanced retriever selection dropdown in the Incident Triage section.
+        </div>
+        
+        <h2>🔍 Advanced Retrieval Method Selection</h2>
+        
+        <div class="retriever-section">
+            <div class="label">Retrieval Method</div>
+            <select class="retriever-dropdown">
+                <option value="Original RAG" selected>Original RAG</option>
+                <option value="Hybrid Search">Hybrid Search</option>
+                <option value="Lineage-Aware Retrieval">Lineage-Aware Retrieval</option>
+                <option value="Cohere Reranking">Cohere Reranking</option>
+                <option value="Query Expansion">Query Expansion</option>
+            </select>
+            <div class="description">
+                Standard RAG with full incident triage workflow
+            </div>
+        </div>
+
+        <div class="retriever-section">
+            <h3>🎯 Available Retrieval Methods</h3>
+            <ul>
+                <li><strong>Original RAG:</strong> Standard vector similarity search (Baseline)</li>
+                <li><strong>Hybrid Search:</strong> Vector search combined with BM25 scoring (+108.1% improvement)</li>
+                <li><strong>Lineage-Aware Retrieval:</strong> Context-aware search with data lineage (+119.7% improvement)</li>
+                <li><strong>Cohere Reranking:</strong> Advanced reranking with Cohere API (+118.9% improvement)</li>
+                <li><strong>Query Expansion:</strong> Semantic query enhancement (+119.3% improvement)</li>
+            </ul>
+        </div>
+
+        <div class="screenshot-note">
+            <strong>🌐 Live Application:</strong> The full Traceback application is running at <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -228,17 +228,20 @@ We successfully implemented and integrated 5 advanced retrieval methods:
 
 ### Frontend Integration
 
-The web interface includes a dynamic dropdown for retriever selection:
+The web interface includes a dynamic dropdown for retriever selection with real-time descriptions and method comparison capabilities.
 
-```html
-<select id="retrieverMethod" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-    <option value="Original RAG" selected>Original RAG</option>
-    <option value="Hybrid Search">Hybrid Search</option>
-    <option value="Lineage-Aware Retrieval">Lineage-Aware Retrieval</option>
-    <option value="Cohere Reranking">Cohere Reranking</option>
-    <option value="Query Expansion">Query Expansion</option>
-</select>
-```
+**Live Application Interface:**
+- **Web Interface**: http://localhost:3000 (when running)
+- **Interface Preview**: See `capture_interface.html` for a visual representation of the retriever selection dropdown
+
+The interface allows users to:
+- Select from 5 different retrieval methods
+- View real-time descriptions for each method  
+- Compare performance improvements
+- Submit incident queries with their chosen retrieval strategy
+
+![Retriever Selection Interface](capture_interface.html)
+*Screenshot showing the Traceback web interface with the advanced retriever selection dropdown in the Incident Triage section*
 
 ---
 
