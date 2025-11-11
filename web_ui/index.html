@@ -92,10 +92,6 @@
                             class="py-4 px-1 border-b-2 border-transparent font-medium text-gray-500 hover:text-gray-700">
                         <i class="fas fa-project-diagram mr-2"></i>Data Lineage
                     </button>
-                    <button onclick="showTab('system')" id="system-tab" 
-                            class="py-4 px-1 border-b-2 border-transparent font-medium text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-chart-bar mr-2"></i>System Stats
-                    </button>
                 </nav>
             </div>
 
@@ -112,32 +108,6 @@
                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                           placeholder="Describe the data pipeline incident or issue..."></textarea>
                                 
-                                <div class="mt-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Priority Level</label>
-                                    <select id="incidentPriority" 
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="low">Low</option>
-                                        <option value="medium" selected>Medium</option>
-                                        <option value="high">High</option>
-                                        <option value="critical">Critical</option>
-                                    </select>
-                                </div>
-
-                                <div class="mt-4">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Retrieval Method</label>
-                                    <select id="retrieverMethod" 
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="Original RAG" selected>Original RAG</option>
-                                        <option value="Hybrid Search">Hybrid Search</option>
-                                        <option value="Lineage-Aware Retrieval">Lineage-Aware Retrieval</option>
-                                        <option value="Cohere Reranking">Cohere Reranking</option>
-                                        <option value="Query Expansion">Query Expansion</option>
-                                    </select>
-                                    <p class="text-xs text-gray-500 mt-1" id="retriever-description">
-                                        Standard RAG with full incident triage workflow
-                                    </p>
-                                </div>
-
                                 <button onclick="triageIncident()" 
                                         class="mt-4 w-full bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">
                                     <i class="fas fa-play mr-2"></i>Analyze Incident
@@ -181,6 +151,15 @@
                                         class="mt-4 w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
                                     <i class="fas fa-search mr-2"></i>Search Documents
                                 </button>
+
+                                <div class="mt-6">
+                                    <h4 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                        <i class="fas fa-book-open mr-2 text-blue-600"></i>Sources from Last Analysis
+                                    </h4>
+                                    <div id="recent-sources" class="flex flex-wrap gap-2 text-sm text-gray-700">
+                                        <span class="text-gray-400 italic">Run an incident analysis to populate sources.</span>
+                                    </div>
+                                </div>
                             </div>
 
                             <div>
@@ -210,6 +189,15 @@
                                         class="mt-4 w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors">
                                     <i class="fas fa-project-diagram mr-2"></i>Get Lineage
                                 </button>
+
+                                <div class="mt-6">
+                                    <h4 class="font-semibold text-gray-800 mb-2 flex items-center">
+                                        <i class="fas fa-network-wired mr-2 text-green-600"></i>Tables from Last Analysis
+                                    </h4>
+                                    <div id="recent-tables" class="flex flex-wrap gap-2 text-sm text-gray-700">
+                                        <span class="text-gray-400 italic">Run an incident analysis to populate tables.</span>
+                                    </div>
+                                </div>
                             </div>
 
                             <div>
@@ -224,55 +212,59 @@
                     </div>
                 </div>
 
-                <!-- System Stats Tab -->
-                <div id="system-content" class="tab-content hidden">
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold mb-4">System Statistics</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                            <div class="bg-blue-50 p-4 rounded-lg">
-                                <div class="flex items-center">
-                                    <i class="fas fa-database text-blue-600 text-2xl mr-3"></i>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Documents</p>
-                                        <p id="doc-count" class="text-xl font-semibold">-</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-green-50 p-4 rounded-lg">
-                                <div class="flex items-center">
-                                    <i class="fas fa-sitemap text-green-600 text-2xl mr-3"></i>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Lineage Nodes</p>
-                                        <p id="node-count" class="text-xl font-semibold">-</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-purple-50 p-4 rounded-lg">
-                                <div class="flex items-center">
-                                    <i class="fas fa-link text-purple-600 text-2xl mr-3"></i>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Lineage Edges</p>
-                                        <p id="edge-count" class="text-xl font-semibold">-</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-orange-50 p-4 rounded-lg">
-                                <div class="flex items-center">
-                                    <i class="fas fa-code-branch text-orange-600 text-2xl mr-3"></i>
-                                    <div>
-                                        <p class="text-sm text-gray-600">API Version</p>
-                                        <p id="api-version" class="text-xl font-semibold">-</p>
-                                    </div>
-                                </div>
-                            </div>
+            </div>
+        </div>
+
+        <!-- System Stats Overview -->
+        <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4 flex items-center">
+                <i class="fas fa-chart-bar mr-2 text-gray-600"></i>
+                System Overview
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-blue-50 p-4 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-database text-blue-600 text-2xl mr-3"></i>
+                        <div>
+                            <p class="text-sm text-gray-600">Documents</p>
+                            <p id="doc-count" class="text-xl font-semibold">-</p>
                         </div>
-                        
-                        <button onclick="loadSystemStats()" 
-                                class="mt-6 bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">
-                            <i class="fas fa-refresh mr-2"></i>Refresh Stats
-                        </button>
                     </div>
                 </div>
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-sitemap text-green-600 text-2xl mr-3"></i>
+                        <div>
+                            <p class="text-sm text-gray-600">Lineage Nodes</p>
+                            <p id="node-count" class="text-xl font-semibold">-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-link text-purple-600 text-2xl mr-3"></i>
+                        <div>
+                            <p class="text-sm text-gray-600">Lineage Edges</p>
+                            <p id="edge-count" class="text-xl font-semibold">-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-orange-50 p-4 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-code-branch text-orange-600 text-2xl mr-3"></i>
+                        <div>
+                            <p class="text-sm text-gray-600">API Version</p>
+                            <p id="api-version" class="text-xl font-semibold">-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 flex justify-end">
+                <button onclick="loadSystemStats()" 
+                        class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-refresh mr-2"></i>Refresh Stats
+                </button>
             </div>
         </div>
     </main>
@@ -289,12 +281,17 @@
         // Global variables
         let currentTab = 'triage';
         let apiBaseUrl = 'http://localhost:8000';
+        const DEFAULT_RETRIEVER = 'Lineage-Aware Retrieval';
+        let lastSourcesUsed = [];
+        let lastBlastRadius = [];
+        let lastIncidentQuestion = '';
+        let searchPrepopulated = false;
+        let lineagePrepopulated = false;
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
             testConnection();
             loadSystemStats();
-            setupRetrieverMethodHandler();
         });
 
         // Tab management
@@ -318,25 +315,36 @@
             document.getElementById(tabName + '-tab').classList.add('border-blue-500', 'text-blue-600');
             
             currentTab = tabName;
-        }
-
-        // Retriever method handler
-        function setupRetrieverMethodHandler() {
-            const retrieverSelect = document.getElementById('retrieverMethod');
-            const descriptionElement = document.getElementById('retriever-description');
             
-            const descriptions = {
-                'Original RAG': 'Standard RAG with full incident triage workflow',
-                'Hybrid Search': 'Vector search combined with BM25 scoring',
-                'Lineage-Aware Retrieval': 'Context-aware search with data lineage',
-                'Cohere Reranking': 'Advanced reranking with Cohere API',
-                'Query Expansion': 'Semantic query enhancement with multiple search strategies'
-            };
+            // Auto-populate document search with latest incident context
+            if (tabName === 'search' && (lastIncidentQuestion || lastSourcesUsed.length > 0)) {
+                const searchInput = document.getElementById('searchQuery');
+                if (searchInput) {
+                    const defaultQuery = lastSourcesUsed.length > 0 ? lastSourcesUsed[0] : lastIncidentQuestion;
+                    searchInput.value = defaultQuery || '';
+                }
+                
+                if (!searchPrepopulated) {
+                    searchPrepopulated = true;
+                    const defaultQuery = lastSourcesUsed.length > 0 ? lastSourcesUsed[0] : lastIncidentQuestion;
+                    if (defaultQuery) {
+                        searchDocuments(defaultQuery, null, true);
+                    }
+                }
+            }
             
-            retrieverSelect.addEventListener('change', function() {
-                const selectedMethod = this.value;
-                descriptionElement.textContent = descriptions[selectedMethod] || 'Unknown method';
-            });
+            // Auto-populate lineage tab with first blast radius table
+            if (tabName === 'lineage' && lastBlastRadius.length > 0) {
+                const lineageInput = document.getElementById('tableName');
+                if (lineageInput) {
+                    lineageInput.value = lastBlastRadius[0];
+                }
+                
+                if (!lineagePrepopulated) {
+                    lineagePrepopulated = true;
+                    getLineage(lastBlastRadius[0], true);
+                }
+            }
         }
 
         // API functions
@@ -373,8 +381,7 @@
 
         async function triageIncident() {
             const question = document.getElementById('incidentQuestion').value;
-            const priority = document.getElementById('incidentPriority').value;
-            const retrieverMethod = document.getElementById('retrieverMethod').value;
+            const retrieverMethod = DEFAULT_RETRIEVER;
             
             if (!question.trim()) {
                 alert('Please enter an incident description');
@@ -384,6 +391,8 @@
             showLoading();
             
             try {
+                lastIncidentQuestion = question;
+                
                 const response = await fetch(`${apiBaseUrl}/incident/triage`, {
                     method: 'POST',
                     headers: {
@@ -391,7 +400,6 @@
                     },
                     body: JSON.stringify({
                         question: question,
-                        priority: priority,
                         retriever: retrieverMethod
                     })
                 });
@@ -420,11 +428,8 @@
                 return;
             }
             
-            // Get the priority from the form for proper formatting
-            const priority = document.getElementById('incidentPriority').value || 'medium';
-            
             // Extract blast radius from incident brief if not provided separately
-            let blastRadiusItems = data.blast_radius || [];
+            let blastRadiusItems = Array.isArray(data.blast_radius) ? data.blast_radius.filter(item => item && item.trim().length > 0) : [];
             if (blastRadiusItems.length === 0 && data.incident_brief) {
                 // Try to extract blast radius from the incident brief text
                 const briefText = data.incident_brief;
@@ -446,7 +451,74 @@
                         }
                     }
                 }
+                
+                // Fallback: look for narrative descriptions of downstream impact
+                if (blastRadiusItems.length === 0) {
+                    const downstreamMatch = briefText.match(/\*\*(?:Blast Radius|Impact on Downstream Systems)\*\*:\s*([\s\S]*?)(?:\n\s*\*\*|\n\n|$)/i);
+                    if (downstreamMatch) {
+                        const downstreamText = downstreamMatch[1];
+                        
+                        // Extract table names wrapped in backticks
+                        const downstreamTables = downstreamText.match(/`([^`]+)`/g);
+                        if (downstreamTables) {
+                            blastRadiusItems = downstreamTables.map(item => item.replace(/`/g, '').trim());
+                        } else {
+                            // Split on commas, bullets, or newlines for plain text descriptions
+                            blastRadiusItems = downstreamText
+                                .split(/[,•\n]/)
+                                .map(item => item.trim())
+                                .filter(item => item.length > 0);
+                        }
+                    }
+                }
+                
+                // Deduplicate while preserving order
+                if (blastRadiusItems.length > 1) {
+                    const seen = new Set();
+                    blastRadiusItems = blastRadiusItems.filter(item => {
+                        if (seen.has(item)) return false;
+                        seen.add(item);
+                        return true;
+                    });
+                }
+                
+                // Final fallback: capture table identifiers mentioned anywhere in the brief
+                if (blastRadiusItems.length === 0) {
+                    const tableMatches = briefText.match(/\b(?:raw|curated|analytics|bi|ops)\.[a-z0-9_]+/gi);
+                    if (tableMatches) {
+                        const seenTables = new Set();
+                        blastRadiusItems = tableMatches
+                            .map(table => table.toLowerCase())
+                            .filter(table => {
+                                if (seenTables.has(table)) return false;
+                                seenTables.add(table);
+                                return true;
+                            })
+                            .map(table => table);
+                    }
+                }
             }
+            
+            // Track latest sources and blast radius
+            lastBlastRadius = Array.from(new Set(blastRadiusItems));
+            if (Array.isArray(data.sources_used)) {
+                const seenSources = new Set();
+                lastSourcesUsed = data.sources_used
+                    .map(item => (typeof item === 'string' ? item.trim() : ''))
+                    .filter(item => {
+                        if (!item || seenSources.has(item)) {
+                            return false;
+                        }
+                        seenSources.add(item);
+                        return true;
+                    });
+            } else {
+                lastSourcesUsed = [];
+            }
+            updateDocumentSources(lastSourcesUsed);
+            updateLineageSuggestions(lastBlastRadius);
+            searchPrepopulated = false;
+            lineagePrepopulated = false;
             
             resultsDiv.innerHTML = `
                 <div class="fade-in space-y-4">
@@ -454,28 +526,29 @@
                         <h4 class="font-semibold text-red-800 mb-2">
                             <i class="fas fa-exclamation-triangle mr-2"></i>Incident Brief
                         </h4>
-                        <div class="text-red-700 whitespace-pre-wrap">${formatIncidentBrief(hideBlastRadiusSection(data.incident_brief), priority)}</div>
-                    </div>
-                    
-                    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                        <h4 class="font-semibold text-yellow-800 mb-2">
-                            <i class="fas fa-radiation mr-2"></i>Blast Radius
-                        </h4>
-                        <ul class="text-yellow-700">
-                            ${blastRadiusItems.length > 0 
-                                ? blastRadiusItems.map(item => `<li class="mb-1">• ${item}</li>`).join('')
-                                : '<li class="text-gray-500 italic">No blast radius identified</li>'
-                            }
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                        <h4 class="font-semibold text-blue-800 mb-2">
-                            <i class="fas fa-chart-line mr-2"></i>Impact Assessment
-                        </h4>
-                        <div class="text-blue-700">
-                            ${data.impact_assessment ? formatImpactAssessment(data.impact_assessment) : 'No impact assessment available'}
-                        </div>
+                        ${blastRadiusItems.length > 0 ? `
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                ${blastRadiusItems.map(item => `
+                                    <button type="button"
+                                            class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-medium border border-yellow-200 hover:bg-yellow-200 transition-colors"
+                                            onclick="openLineageForTable('${item.replace(/'/g, "\\'")}')">
+                                        ${item}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                        ${lastSourcesUsed.length > 0 ? `
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                ${lastSourcesUsed.map(source => `
+                                    <button type="button"
+                                            class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium border border-blue-200 hover:bg-blue-200 transition-colors"
+                                            onclick="openSourceInSearch('${source.replace(/'/g, "\\'")}')">
+                                        ${source}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                        <div class="text-red-700 whitespace-pre-wrap">${formatIncidentBrief(data.incident_brief)}</div>
                     </div>
                     
                     <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
@@ -492,18 +565,74 @@
                                 <span class="font-medium">Analysis Time:</span>
                                 <span class="text-gray-600">${new Date().toLocaleString()}</span>
                             </div>
-                            <div>
-                                <span class="font-medium">Priority:</span>
-                                <span class="text-gray-600 capitalize">${priority}</span>
-                            </div>
-                            <div>
-                                <span class="font-medium">Retriever Method:</span>
-                                <span class="text-gray-600">${document.getElementById('retrieverMethod').value}</span>
-                            </div>
                         </div>
                     </div>
                 </div>
             `;
+        }
+
+        function updateDocumentSources(sources) {
+            const container = document.getElementById('recent-sources');
+            if (!container) {
+                return;
+            }
+            
+            if (!sources || sources.length === 0) {
+                container.innerHTML = '<span class="text-gray-400 italic">Run an incident analysis to populate sources.</span>';
+                return;
+            }
+            
+            container.innerHTML = sources.map(source => `
+                <button type="button"
+                        class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium border border-blue-200 hover:bg-blue-200 transition-colors"
+                        onclick="openSourceInSearch('${source.replace(/'/g, "\\'")}')">
+                    ${source}
+                </button>
+            `).join('');
+        }
+        
+        async function openSourceInSearch(source) {
+            if (!source) {
+                return;
+            }
+            const searchInput = document.getElementById('searchQuery');
+            if (searchInput) {
+                searchInput.value = source;
+            }
+            showTab('search');
+            await searchDocuments(source, null, true);
+        }
+        
+        function updateLineageSuggestions(tables) {
+            const container = document.getElementById('recent-tables');
+            if (!container) {
+                return;
+            }
+            
+            if (!tables || tables.length === 0) {
+                container.innerHTML = '<span class="text-gray-400 italic">Run an incident analysis to populate tables.</span>';
+                return;
+            }
+            
+            container.innerHTML = tables.map(table => `
+                <button type="button"
+                        class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium border border-green-200 hover:bg-green-200 transition-colors"
+                        onclick="openLineageForTable('${table.replace(/'/g, "\\'")}')">
+                    ${table}
+                </button>
+            `).join('');
+        }
+        
+        async function openLineageForTable(table) {
+            if (!table) {
+                return;
+            }
+            const tableInput = document.getElementById('tableName');
+            if (tableInput) {
+                tableInput.value = table;
+            }
+            showTab('lineage');
+            await getLineage(table, true);
         }
 
         function hideBlastRadiusSection(briefText) {
@@ -514,7 +643,7 @@
             return briefText.replace(/## 3\. Blast Radius[\s\S]*?(?=## 4\.|$)/, '');
         }
 
-        function formatIncidentBrief(briefText, priority = 'medium') {
+        function formatIncidentBrief(briefText) {
             if (!briefText) return '';
             
             // Get current date and time
@@ -531,24 +660,14 @@
                 timeZoneName: 'short'
             });
             
-            // Map priority to severity levels
-            const priorityMap = {
-                'critical': 'Critical (P0)',
-                'high': 'High (P1)',
-                'medium': 'Medium (P2)',
-                'low': 'Low (P3)'
-            };
-            
-            const severityLevel = priorityMap[priority.toLowerCase()] || 'Medium (P2)';
-            
             // Replace date placeholders with actual dates
             let formattedText = briefText
                 .replace(/\[insert date\]/gi, currentDate)
                 .replace(/\[insert time\]/gi, currentTime)
                 .replace(/\[insert timestamp\]/gi, `${currentDate} at ${currentTime}`)
-                .replace(/\[insert severity level\]/gi, severityLevel)
-                .replace(/\[insert impact level\]/gi, severityLevel)
-                .replace(/\[insert severity\]/gi, severityLevel);
+                .replace(/\[insert severity level\]/gi, 'Medium (P2)')
+                .replace(/\[insert impact level\]/gi, 'Medium (P2)')
+                .replace(/\[insert severity\]/gi, 'Medium (P2)');
             
             return formattedText;
         }
@@ -587,12 +706,16 @@
             return formatted || '<div class="text-sm">Impact assessment data available</div>';
         }
 
-        async function searchDocuments() {
-            const query = document.getElementById('searchQuery').value;
-            const limit = document.getElementById('searchLimit').value;
+        async function searchDocuments(queryOverride = null, limitOverride = null, silent = false) {
+            const queryInput = document.getElementById('searchQuery');
+            const limitSelect = document.getElementById('searchLimit');
+            const query = queryOverride !== null ? queryOverride : (queryInput ? queryInput.value : '');
+            const limit = limitOverride !== null ? limitOverride : (limitSelect ? limitSelect.value : 5);
             
             if (!query.trim()) {
-                alert('Please enter a search query');
+                if (!silent) {
+                    alert('Please enter a search query');
+                }
                 return;
             }
             
@@ -653,11 +776,20 @@
             `;
         }
 
-        async function getLineage() {
-            const tableName = document.getElementById('tableName').value;
+        async function getLineage(tableNameOverride = null, silent = false) {
+            const tableInput = document.getElementById('tableName');
+            const tableName = tableNameOverride !== null
+                ? tableNameOverride
+                : (tableInput ? tableInput.value : '');
+            
+            if (tableInput && tableNameOverride !== null) {
+                tableInput.value = tableNameOverride;
+            }
             
             if (!tableName.trim()) {
-                alert('Please enter a table name');
+                if (!silent) {
+                    alert('Please enter a table name');
+                }
                 return;
             }
             
@@ -674,7 +806,9 @@
                 }
             } catch (error) {
                 console.error('Lineage error:', error.message);
-                alert('Error: ' + error.message);
+                if (!silent) {
+                    alert('Error: ' + error.message);
+                }
             } finally {
                 hideLoading();
             }

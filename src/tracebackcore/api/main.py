@@ -5,27 +5,22 @@ FastAPI server for the Traceback incident triage system.
 """
 
 import os
-import json
+import sys
 import time
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
 
-# Add src to path for imports
-import sys
-from pathlib import Path
 # Add the project root (src's parent) to Python path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 # Import our core system components
-from tracebackcore.core import traceback_graph, lineage_retriever, vectorstore, initialize_system, llm
-
 # Global variables for the core system
 traceback_graph = None
 lineage_retriever = None
@@ -108,26 +103,67 @@ def generate_lineage_aware_response(question: str) -> Dict[str, Any]:
         if table_names:
             enhanced_query = f"{question} Related tables: {', '.join(table_names[:3])}"
         
-        # Search with enhanced query
-        docs = vectorstore.similarity_search(enhanced_query, k=5)
+        # Search with enhanced query using lineage-aware retriever when available
+        search_docs = []
+        if lineage_retriever:
+            search_docs = lineage_retriever.search_with_lineage(enhanced_query, k=5)
+        else:
+            search_docs = vectorstore.similarity_search(enhanced_query, k=5)
+        
+        docs = search_docs[:5]
         context_docs = [doc.page_content for doc in docs]
+        context_sources = [
+            doc.metadata.get("file_name", doc.metadata.get("table", "unknown"))
+            for doc in docs
+        ]
         
         # Generate answer
         context_text = "\n\n".join(context_docs)
-        prompt = f"""Based on the following context, answer the question: {question}
+        
+        # Determine blast radius using lineage information
+        all_table_names = set(table_names)
+        table_regex_matches = re.findall(r'\b(?:raw|curated|analytics|bi|ops)\.[a-z0-9_]+\b', context_text, flags=re.IGNORECASE)
+        for table in table_regex_matches:
+            all_table_names.add(table.lower())
+        
+        blast_radius = []
+        if lineage_retriever and all_table_names:
+            downstream = []
+            for table_name in all_table_names:
+                downstream.extend(lineage_retriever.find_downstream_impact(table_name))
+            blast_radius = sorted(set(downstream))
+        
+        # Generate comprehensive incident brief
+        brief_prompt = f"""
+You are the Incident Writer for the Traceback data pipeline triage system.
+
+Question: {question}
 
 Context:
 {context_text}
 
-Answer:"""
-        
-        response = llm.invoke(prompt)
-        answer = response.content if hasattr(response, 'content') else str(response)
+Known downstream impact: {', '.join(blast_radius) if blast_radius else 'None identified'}
+
+Compose a single, structured incident brief that blends business and technical insights using these sections:
+1. **Incident Summary**
+2. **Business Impact**
+3. **Blast Radius**
+4. **Root Cause Analysis**
+5. **Recommended Actions**
+6. **Recovery Plan**
+7. **Prevention / Next Steps**
+
+Use concise paragraphs or bullet points under each heading.
+"""
+        brief_response = llm.invoke(brief_prompt)
+        incident_brief = brief_response.content if hasattr(brief_response, 'content') else str(brief_response)
         
         return {
             'question': question,
-            'answer': answer,
+            'incident_brief': incident_brief,
+            'blast_radius': blast_radius,
             'context': context_docs,
+            'sources': context_sources,
             'method': 'Lineage-Aware Retrieval'
         }
         
@@ -136,6 +172,7 @@ Answer:"""
             'question': question,
             'answer': f"Error generating response: {str(e)}",
             'context': [],
+            'blast_radius': [],
             'method': 'Lineage-Aware Retrieval (Error)'
         }
 
@@ -288,6 +325,7 @@ async def lifespan(app: FastAPI):
     
     try:
         # Initialize core components
+        from tracebackcore.core import initialize_system
         initialize_system()
         
         # Update global variables
@@ -409,16 +447,23 @@ async def triage_incident(request: IncidentRequest):
                 processing_time = time.time() - start_time
                 
                 # Convert advanced retriever result to IncidentResponse format
+                incident_brief = result.get("incident_brief") or result.get("answer", "No response generated")
+                blast_radius = result.get("blast_radius", [])
+                context_sources = result.get("sources", [])
+                impact_assessment_value = result.get("impact_assessment") or "See incident brief for combined analysis."
+
+                impact_assessment = {
+                    "assessment": impact_assessment_value,
+                    "context_sources": [{"source": src} for src in context_sources] or [{"source": f"Advanced Retriever: {retriever_method}"}],
+                    "method": result.get("method", retriever_method)
+                }
+                
                 return IncidentResponse(
-                    incident_brief=result.get("answer", "No response generated"),
-                    blast_radius=[],  # Advanced retrievers don't provide blast radius
-                    impact_assessment={
-                        "assessment": result.get("answer", ""),
-                        "context_sources": [{"source": f"Advanced Retriever: {retriever_method}"}],
-                        "method": result.get("method", retriever_method)
-                    },
+                    incident_brief=incident_brief,
+                    blast_radius=blast_radius,
+                    impact_assessment=impact_assessment,
                     processing_time=processing_time,
-                    sources_used=[f"Advanced Retriever: {retriever_method}"]
+                    sources_used=context_sources if context_sources else [f"Advanced Retriever: {retriever_method}"]
                 )
         
         # Use original RAG workflow
